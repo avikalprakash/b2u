@@ -35,7 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.lueinfo.bshop.Adapter.AddtoCartMobile;
+import com.lueinfo.bshop.Adapter.AddtoCartMobileMan;
 import com.lueinfo.bshop.Adapter.AndroidImageAdapternew;
 import com.lueinfo.bshop.Adapter.CategoryAdapter;
 import com.lueinfo.bshop.Adapter.Details;
@@ -576,7 +576,7 @@ listViewproductpromotion.setLayoutManager(manager1);
                                 Log.d("HELLO<><>", String.valueOf(position));
                                         Log.d("HELLO<><><>",entityId);
                         String image=cotegory_list.get(position).getProductPromotionImage();
-                        AddtoCartMobile addtoCartMobile = new AddtoCartMobile();
+                        AddtoCartMobileMan addtoCartMobile = new AddtoCartMobileMan();
                         android.support.v4.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         Bundle bundle = new Bundle();
                         bundle.putString("KeyValue",entityId);
@@ -602,7 +602,7 @@ listViewproductpromotion.setLayoutManager(manager1);
                                 // do whatever
                                 String entityId=newProducts.get(position).getProductPromotionId();
                                 String image=cotegory_list.get(position).getProductPromotionImage();
-                                AddtoCartMobile addtoCartMobile = new AddtoCartMobile();
+                                AddtoCartMobileMan addtoCartMobile = new AddtoCartMobileMan();
                                 android.support.v4.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                 Bundle bundle = new Bundle();
                                 bundle.putString("KeyValue",entityId);

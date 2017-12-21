@@ -106,7 +106,7 @@ public class TodaysDealAdapter extends RecyclerView.Adapter<TodaysDealAdapter.Vi
             @Override
             public void onClick(View v) {
                 String entityId=productList.get(i).getId();
-                AddtoCartMobile addtoCartMobile = new AddtoCartMobile();
+                AddtoCartMobileMan addtoCartMobile = new AddtoCartMobileMan();
                 Bundle bundle = new Bundle();
                 bundle.putString("KeyValue",entityId);
                 addtoCartMobile.setArguments(bundle);
