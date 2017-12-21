@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:background="@color/Background"
+
+    android:layout_height="50dp">
+
+<TextView
+    android:id="@+id/cot_item_text"
+    android:layout_width="wrap_content"
+    android:layout_height="50dp"
+    android:gravity="center"
+    android:textStyle="normal"
+    android:layout_marginLeft="10dp"
+    android:textColor="@color/colorPrimaryWhite"
+    android:text="item name"/>
+    <ImageView
+        android:id="@+id/cot_item_img"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+       android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/white_arrow_new"/>
+   <View
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:layout_alignParentBottom="true"
+       android:background="@android:color/darker_gray"/>
+</RelativeLayout>

@@ -1,0 +1,159 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:scrollbars="none"
+    android:id="@+id/scroll_today"
+    tools:context="com.lueinfo.bshop.Fragment.TodaysDeal">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/nonet_ll_cot"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true">
+        <ImageView
+            android:layout_width="96px"
+            android:layout_height="96px"
+            android:layout_gravity="center"
+            android:src="@drawable/noconnection"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:textSize="15sp"
+            android:text="Low or no Internet Connection"/>
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/retry"
+            android:text="Retry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+<LinearLayout
+    android:id="@+id/toadydeallayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal">
+        <android.support.v7.widget.CardView
+            android:id="@+id/change_view"
+            android:layout_width="0dp"
+            android:layout_weight=".3"
+            card_view:cardElevation="1dp"
+            card_view:contentPadding="1dp"
+            card_view:cardCornerRadius="0dp"
+            card_view:cardMaxElevation="1dp"
+            android:layout_height="50dp">
+
+            <ImageView
+                android:id="@+id/view_con_img"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:foregroundGravity="center"
+                android:src="@drawable/grid" />
+        </android.support.v7.widget.CardView>
+        <View
+            android:layout_width="0dp"
+            android:layout_weight=".01"
+            android:layout_height="50dp"/>
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_weight=".7"
+            android:layout_height="50dp"
+            card_view:cardElevation="1dp"
+            card_view:contentPadding="1dp"
+            card_view:cardCornerRadius="0dp"
+            card_view:cardMaxElevation="1dp">
+            <LinearLayout
+                android:id="@+id/filter1layout"
+                android:gravity="bottom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="3dp"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Filter"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" "
+                    />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+  <!--  <ProgressBar
+        android:id="@+id/circular_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:indeterminateDrawable="@android:drawable/progress_horizontal"
+        android:theme="@style/LinearProgress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        />-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_todays_deal"
+        android:layout_width="match_parent"
+        android:layout_height="518dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:clipToPadding="true">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <android.support.design.widget.CollapsingToolbarLayout
+        android:background="@color/colorAccent"
+
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/view2">
+        <RelativeLayout
+            android:id="@+id/pre_next"
+            android:background="@color/colorAccent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:paddingTop="10dp"
+                android:paddingLeft="20dp"
+                android:id="@+id/previous"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:layout_alignParentLeft="true"
+                android:text="@string/previous"/>
+            <TextView
+                android:paddingRight="10dp"
+                android:paddingTop="10dp"
+                android:id="@+id/next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@android:color/white"
+                android:text="@string/next"/>
+        </RelativeLayout>
+    </android.support.design.widget.CollapsingToolbarLayout>
+
+</LinearLayout>
+    </RelativeLayout>
+
+</ScrollView>

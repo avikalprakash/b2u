@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/home_icon"
+            android:title="@string/Home_Store_name" />
+        <item
+            android:id="@+id/categories"
+            android:icon="@drawable/cotegory_icon"
+            android:title="@string/Category_name" />
+
+        <item
+            android:id="@+id/hotdeal_nav"
+            android:icon="@drawable/ic_today_black"
+            android:title="@string/Hot_Deals_name" />
+    </group>
+
+<item android:title="Menu">
+    <group android:checkableBehavior="single">
+
+        <item android:id="@+id/noti_draw"
+            android:icon="@drawable/ic_notifications_black"
+            android:title="@string/Notificaion_name"/>
+        <item android:id="@+id/offer_draw"
+            android:icon="@drawable/ic_local_offer"
+            android:title="@string/Offer_name"/>
+    </group>
+</item>
+    <group  android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/myaccount"
+            android:icon="@drawable/ic_account_box"
+            android:title="@string/My_Account_name" />
+
+        <item
+            android:id="@+id/myorders"
+            android:icon="@drawable/myorder"
+            android:title="@string/Order_name" />
+        <item
+            android:id="@+id/mywishlist"
+            android:icon="@drawable/mywishlist"
+            android:title="@string/My_Wishlist_name" />
+        <item
+            android:id="@+id/mycart"
+            android:icon="@drawable/ic_shopping_cart_black_24dp"
+            android:title="@string/My_Cart_name" />
+    </group>
+
+    <group android:checkableBehavior="single"
+        >
+        <item
+            android:id="@+id/introduce"
+            android:icon="@drawable/introduce"
+            android:title="@string/intriduce"/>
+        <item
+            android:id="@+id/intriduceqr"
+            android:icon="@drawable/qr"
+            android:title="@string/intqr"/>
+        <item
+            android:id="@+id/login"
+            android:icon="@drawable/login"
+            android:title="@string/Login_name"/>
+
+        <item
+            android:id="@+id/Logout"
+            android:icon="@drawable/logout"
+            android:title="@string/Logout"/>
+
+    </group>
+
+
+
+    <item android:title="@string/Language">
+        <menu>
+            <item
+                android:id="@+id/lang"
+                android:icon="@drawable/sent"
+                android:title="@string/Language" />
+            <item
+                android:id="@+id/Contactus"
+                android:icon="@drawable/ic_contact_phone"
+                android:title="@string/Contact_name" />
+        </menu>
+    </item>
+</menu>

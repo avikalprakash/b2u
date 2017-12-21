@@ -1,0 +1,157 @@
+<resources>
+    <string name="app_name">Bshop</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="srch">Search</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="Home_Store_name">家</string>
+    <string name="Category_name">类别</string>
+    <string name="My_Account_name">我的帐户</string>
+    <string name="Account">帳戶</string>
+    <string name="My_Cart_name">我的车</string>
+    <string name="My_Order_name">我的订单</string>
+    <string name="My_Wishlist_name">我的收藏</string>
+    <string name="Notificaion_name">通知</string>
+    <string name="Help_Center_name">帮助中心</string>
+    <string name="Hot_Deals_name">热卖 </string>
+    <string name="Deal">合同</string>
+    <string name="Other_name">其他</string>
+    <string name="Offer_name">提供 区</string>
+    <string name="Order_name">我的订单</string>
+    <string name="Contact_name">联系我们</string>
+    <string name="Login_name">登录</string>
+    <string name="newproducts">新產品</string>
+    <string name="hello">你好</string>
+    <string name="intriduce">介绍人</string>
+    <string name="intqr">二维码</string>
+    <string name="topcategory">頂級類別</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="en">English</string>
+    <string name="vi">Vietnamese</string>
+    <string name="zh">Chinese</string>
+    <string name="msg_change_locale">消息更改。</string>
+    <string name="txt_setting_changeyourlocale">改变你的语言</string>
+    <string name="CalculatePercentage">Calculate Percentage</string>
+    <string name="EnteryourBill">Enter your Bill</string>
+    <string name="EnterPercentage">Enter Percentage</string>
+    <string name="Result">Result</string>
+    <string name="Calculate">Calculate</string>
+    <string name="LoginUmallzAccount">Login Umallz Account</string>
+    <string name="CreateanewUmallzaccount">Create a new Umallz account</string>
+
+    <string name="previous">以前</string>
+    <string name="next">下一个</string>
+    <string name="UnitPriceRs1500">Unit Price : Rs 1500</string>
+    <string name="WhiteShirt">White Shirt</string>
+    <string name="Select">Select</string>
+    <string name="Filter">Filter</string>
+    <string name="NoResultFound">No Result Found</string>
+
+    <string name="HomeStore">Home Store</string>
+    <string name="Categories">分类</string>
+    <string name="Products">制品</string>
+    <string name="Fashion">时尚</string>
+    <string name="TodaysDeal">今天的交易</string>
+    <string name="YourWishList">您的愿望清单</string>
+    <string name="YourOrders">你的命令</string>
+    <string name="Contactus">联系我们</string>
+    <string name="Logout">登出</string>
+    <string name="Login">登录</string>
+    <string name="Communicate">通信</string>
+    <string name="Language">語言</string>
+    <string name="LoginAccount">登录帐户</string>
+    <string name="CreateanAccount">创建一个帐户</string>
+    <string name="Password">密码</string>
+    <string name="Createanewaccount">创建一个新账户</string>
+    <string name="NewtoJepTag">New to Jepshops ?</string>
+    <string name="Name">Name</string>
+    <string name="Mobile">Mobile</string>
+    <string name="Address">Address</string>
+    <string name="ConfirmPassword">确认密码</string>
+    <string name="ShowPassword">显示密码</string>
+    <string name="AlreadyhaveanAccount">已经有一个帐户？</string>
+    <string name="ForgetPassword">忘记密码 ?</string>
+    <string name="Signupwithyourmobilenumber">Sign up with your mobile number</string>
+
+
+    <string name="Email">電子郵件</string>
+    <string name="Signin">簽到</string>
+
+    <string name="ScanTag">ScanTag</string>
+    <string name="app_name_website">JepTags.Com</string>
+
+
+
+    <string name="ShopBy">Shop By</string>
+    <string name="Category">類別</string>
+    <string name="Search">搜索</string>
+    <string name="Continue">繼續</string>
+    <string name="anti_counterfeiting_solutions"><u>ANTI-COUNTERFEITING</u></string>
+    <string name="company_info">Jep Tags is the solution about anti-counterfeiters on the World had started up in Silicon Valley CA, with hoppy provides a full- service system for brand Owner, Trader, Exporter looking for complete cost-effective to protecting your business and your customer</string>
+    <string name="send_us_feedback">Send Us Feedback</string>
+    <string name="scan_you_nfc_tag">ANTI-COUNTERFEITING</string>
+    <string name="contactus">CONTACT US 24/7</string>
+    <string name="explanation">explanation</string>
+    <string name="First_Name">名字</string>
+    <string name="Last_Name">姓</string>
+    <string name="recommendations">高度推薦</string>
+    <string name="Hello">你好</string>
+    <string name="See_more">See more >> </string>
+    <string name="telephone">telephone</string>
+    <string name="postcode">postcode</string>
+    <string name="region">region</string>
+    <string name="country_id">country id</string>
+    <string name="city">city</string>
+    <string name="street">street</string>
+    <string name="company">company</string>
+    <string name="Add_New">Add New</string>
+    <string name="Enter_your_address_details">Enter your address details</string>
+    <string name="Place_Your_Order">Place Your Order</string>
+    <string name="Payment_Method">Payment_Method</string>
+    <string name="Payment_information">Payment_information</string>
+    <string name="Shipping_Address">Shipping_Address</string>
+    <string name="Delivery">Delivery</string>
+    <string name="Items">Items</string>
+    <string name="Shipping_to">Shipping to</string>
+    <string name="Oder_Summary">Oder Summary</string>
+    <string name="nfc_disabled">nfc_disabled</string>
+    <string name="Product_is_not_certified_by_jeptag">Product is not certified by jeptag</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDhu28wCRphjMFHk90p36O-o6ARNn5Wxow</string>
+    <string name="Product_is_certified_by_jeptag">Product is certified by Jeptag</string>
+    <string name="YourAddress">你的地址</string>
+    <string name="subcategories">小類</string>
+    <string name="your_account">你的帳戶</string>
+    <string name="shop_by_cat">按類別購買</string>
+    <string name="back_to_home">Back to Home</string>
+    <string name="app_id">164465894124942</string>
+    <string name="productdescriptionanddetail">產品描述和細節</string>
+    <string name="Weight">重量</string>
+    <string name="Productcolor">產品顏色</string>
+    <string name="Material">材料</string>
+    <string name="NotAvailable">無法使用</string>
+    <string name="Stock">股票</string>
+    <string name="brandnotavailable">品牌不可用</string>
+    <string name="AddtoCart">添加到購物車</string>
+    <string name="Subtotal">小計</string>
+    <string name="shippingandhandling">運費和手續費</string>
+    <string name="tax">稅</string>
+    <string name="grandtotal">累計</string>
+    <string name="checkout">查看</string>
+    <string name="continueshipping">繼續購物</string>
+    <string name="send">發送</string>
+    <string name="subject">學科</string>
+    <string name="email">電子郵件</string>
+    <string name="message">信息</string>
+    <string name="Contact">聯繫</string>
+    <string name="code">QR码</string>
+    <string name="introducername">介绍人姓名</string>
+    <string name="introducercontact">介绍人联络</string>
+    <string name="noitemincart">没有项目在购物车</string>
+    <string name="languageischanging">语言在变化</string>
+</resources>

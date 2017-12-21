@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <!--android:background="@color/colorPrimaryLight"-->
+    <include
+
+        layout="@layout/header3"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" />
+
+    <ProgressBar
+        android:id="@+id/pb_subcot"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:indeterminateDrawable="@android:drawable/progress_horizontal"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/darktextviewstyle"
+        android:text="@string/Signin"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/ForgetPassword"
+            android:textSize="15sp"
+            android:layout_marginRight="15dp"
+            android:textColor="@android:color/holo_blue_light"/>
+    </RelativeLayout>
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:hint="@string/Email"
+        android:paddingLeft="10dp"
+        android:background="@drawable/rectangle_edit_text"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        />
+    <EditText
+        android:id="@+id/password"
+
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:hint="@string/Password"
+        android:paddingLeft="10dp"
+        android:inputType="textPassword"
+        android:background="@drawable/rectangle_edit_text"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        />
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ShowPassword"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/hidePass"/>
+    <TextView
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        style="@style/darktextviewstyle2"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/yellow_button"
+        android:text="@string/LoginAccount"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="@android:color/holo_blue_light"/>
+
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/create_ac2"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/primary_button"
+        android:text="@string/Createanewaccount"
+        android:textColor="@android:color/white"/>
+
+<!--<com.facebook.login.widget.LoginButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="20dp"
+    android:id="@+id/login_button"/>-->
+</LinearLayout>

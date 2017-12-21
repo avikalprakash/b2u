@@ -1,0 +1,64 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/re"
+    android:background="#5e5858"
+    >
+    <include android:id="@+id/he"
+        layout="@layout/header2"
+        />
+   <!-- <ProgressBar
+        android:id="@+id/pb_home"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/he"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal"
+        android:progressDrawable="@drawable/greenprogress"
+        />-->
+    <ProgressBar
+        android:id="@+id/pb_home"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_below="@+id/he"
+        android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
+        android:visibility="gone"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+       />
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        android:layout_marginTop="100dp"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        app:indicatorName="BallGridBeatIndicator"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+    <ListView
+        android:layout_below="@+id/pb_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10dp"
+        android:scrollbars="none"
+        android:id="@+id/list_home"></ListView>
+    <LinearLayout
+        android:id="@+id/nonet_ll_home"
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+        <ImageView
+            android:layout_width="96px"
+            android:layout_height="96px"
+            android:layout_gravity="center"
+            android:src="@drawable/noconnection"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:textSize="15sp"
+            android:text="Low or no Internet Connection"/>
+    </LinearLayout>
+</RelativeLayout>

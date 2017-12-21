@@ -1,0 +1,156 @@
+<resources>
+    <string name="app_name">Bshop</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="srch">Search</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="Deal">Deals</string>
+    <string name="Home_Store_name">Home</string>
+    <string name="Category_name">Category</string>
+    <string name="My_Account_name">My Account</string>
+    <string name="Account">Account</string>
+    <string name="My_Cart_name">My Cart</string>
+    <string name="My_Order_name">My Orders</string>
+    <string name="My_Wishlist_name">My Wishlist</string>
+    <string name="Notificaion_name">Notification</string>
+    <string name="Help_Center_name">Help Center</string>
+    <string name="Hot_Deals_name">Hot Deals</string>
+    <string name="Other_name">Other</string>
+    <string name="Offer_name">Offer Zone</string>
+    <string name="Order_name">My Order</string>
+    <string name="Contact_name">Contact Us</string>
+    <string name="Login_name">Login</string>
+    <string name="topcategory">Top Category</string>
+    <string name="newproducts">New Products</string>
+    <string name="intriduce">Introducer</string>
+    <string name="intqr">QR Code</string>
+    <string name="hello">Hello</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="en">English</string>
+    <string name="vi">Vietnamese</string>
+    <string name="zh">Chinese</string>
+    <string name="msg_change_locale">Message Change.</string>
+    <string name="txt_setting_changeyourlocale">Change your language</string>
+    <string name="CalculatePercentage">Calculate Percentage</string>
+    <string name="EnteryourBill">Enter your Bill</string>
+    <string name="EnterPercentage">Enter Percentage</string>
+    <string name="Result">Result</string>
+    <string name="Calculate">Calculate</string>
+    <string name="LoginUmallzAccount">Login Umallz Account</string>
+    <string name="CreateanewUmallzaccount">Create a new Umallz account</string>
+
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="UnitPriceRs1500">Unit Price : Rs 1500</string>
+    <string name="WhiteShirt">White Shirt</string>
+    <string name="Select">Select</string>
+    <string name="Filter">Filter</string>
+    <string name="NoResultFound">No Result Found</string>
+
+    <string name="HomeStore">Home Store</string>
+    <string name="Categories">Categories</string>
+    <string name="Products">Products</string>
+    <string name="Fashion">Fashion</string>
+    <string name="TodaysDeal">Todays Deal</string>
+    <string name="YourWishList">Your WishList</string>
+    <string name="YourOrders">Your Orders</string>
+    <string name="Contactus">Contact us</string>
+    <string name="Logout">Log out</string>
+    <string name="Login">Login</string>
+    <string name="Communicate">Communicate</string>
+    <string name="Language">Language</string>
+    <string name="LoginAccount">Login Account</string>
+    <string name="CreateanAccount">Create an Account</string>
+    <string name="Password">Password</string>
+    <string name="Createanewaccount">Create a new account</string>
+    <string name="NewtoJepTag">New to Jepshops ?</string>
+    <string name="Name">Name</string>
+    <string name="Mobile">Mobile</string>
+    <string name="Address">Address</string>
+    <string name="ConfirmPassword">Confirm Password</string>
+    <string name="ShowPassword">Show Password</string>
+    <string name="AlreadyhaveanAccount">Already have an Account ?</string>
+    <string name="ForgetPassword">Forget Password ?</string>
+    <string name="Signupwithyourmobilenumber">Sign up with your mobile number</string>
+
+
+    <string name="Email">Email</string>
+    <string name="Signin">Sign in</string>
+
+    <string name="ScanTag">ScanTag</string>
+    <string name="app_name_website">JepTags.Com</string>
+
+
+
+    <string name="ShopBy">Shop By</string>
+    <string name="Category">Category</string>
+    <string name="Search">Search</string>
+    <string name="Continue">Continue</string>
+    <string name="anti_counterfeiting_solutions"><u>ANTI-COUNTERFEITING</u></string>
+    <string name="company_info">Jep Tags is the solution about anti-counterfeiters on the World had started up in Silicon Valley CA, with hoppy provides a full- service system for brand Owner, Trader, Exporter looking for complete cost-effective to protecting your business and your customer</string>
+    <string name="send_us_feedback">Send Us Feedback</string>
+    <string name="scan_you_nfc_tag">ANTI-COUNTERFEITING</string>
+    <string name="contactus">CONTACT US 24/7</string>
+    <string name="explanation">explanation</string>
+    <string name="First_Name">First Name</string>
+    <string name="Last_Name">Last Name</string>
+    <string name="recommendations">Highly recommended</string>
+    <string name="Hello">Hello</string>
+    <string name="See_more">See more >> </string>
+    <string name="telephone">telephone</string>
+    <string name="postcode">postcode</string>
+    <string name="region">region</string>
+    <string name="country_id">country id</string>
+    <string name="city">city</string>
+    <string name="street">street</string>
+    <string name="company">company</string>
+    <string name="Add_New">Add New</string>
+    <string name="Enter_your_address_details">Enter your address details</string>
+    <string name="Place_Your_Order">Place Your Order</string>
+    <string name="Payment_Method">Payment_Method</string>
+    <string name="Payment_information">Payment_information</string>
+    <string name="Shipping_Address">Shipping_Address</string>
+    <string name="Delivery">Delivery</string>
+    <string name="Items">Items</string>
+    <string name="Shipping_to">Shipping to</string>
+    <string name="Oder_Summary">Oder Summary</string>
+    <string name="nfc_disabled">nfc_disabled</string>
+    <string name="Product_is_not_certified_by_jeptag">Product is not certified by jeptag</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDhu28wCRphjMFHk90p36O-o6ARNn5Wxow</string>
+    <string name="Product_is_certified_by_jeptag">Product is certified by Jeptag</string>
+    <string name="YourAddress">Your Address</string>
+    <string name="subcategories">SubCategories</string>
+    <string name="your_account">Your Account</string>
+    <string name="shop_by_cat">Shop By Category</string>
+    <string name="back_to_home">Back to Home</string>
+    <string name="app_id">164465894124942</string>
+    <string name="productdescriptionanddetail">Product Description And Details</string>
+    <string name="Weight">Weight</string>
+    <string name="Productcolor">Product Color</string>
+    <string name="Material">Material</string>
+    <string name="NotAvailable">Not Available</string>
+    <string name="Stock">Stock</string>
+    <string name="brandnotavailable">Brand Not Available</string>
+    <string name="AddtoCart">Add to Cart</string>
+    <string name="Subtotal">Subtotal</string>
+    <string name="shippingandhandling">Shipping and Handling</string>
+    <string name="tax">Tax</string>
+    <string name="grandtotal">Grand Total</string>
+    <string name="checkout">Checkout</string>
+    <string name="continueshipping">Continue Shoping</string>
+    <string name="send">Send</string>
+    <string name="subject">Subject</string>
+    <string name="email">Email</string>
+    <string name="message">Message</string>
+    <string name="Contact">Contact</string>
+    <string name="code">QR Code</string>
+    <string name="introducername">Introducer Name</string>
+    <string name="introducercontact">Introducer Contact</string>
+    <string name="noitemincart">No Item In Cart</string>
+    <string name="languageischanging">Language is changing</string>
+</resources>

@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryWhite"
+   >
+
+   <!-- <ProgressBar
+        android:id="@+id/pb_cot"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:indeterminateDrawable="@android:drawable/progress_horizontal"
+        android:theme="@style/LinearProgress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        />-->
+  <ListView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="15dp"
+      android:visibility="gone"
+      android:scrollbars="none"
+      android:divider="@android:color/transparent"
+      android:dividerHeight="5.0sp"
+      android:background="@drawable/rectangle_edit_text_one"
+      android:id="@+id/cot_list"></ListView>
+    <LinearLayout
+        android:id="@+id/nonet_ll_cot"
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+<ImageView
+    android:layout_width="96px"
+    android:layout_height="96px"
+    android:layout_gravity="center"
+    android:src="@drawable/noconnection"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:textSize="15sp"
+            android:text="Low or no Internet Connection"/>
+        <Button
+            android:id="@+id/retry"
+            android:text="Retry"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>

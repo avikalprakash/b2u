@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryWhite">
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_alignParentTop="true"
+       android:layout_alignParentLeft="true"
+       android:layout_alignParentStart="true">
+    <GridView
+
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10.0sp"
+        android:id="@+id/subcot_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:numColumns="2"
+        android:layout_toRightOf="@+id/nonet_ll_cot"
+        android:layout_toEndOf="@+id/nonet_ll_cot"
+        android:layout_below="@+id/textView26">
+    </GridView>
+    <LinearLayout
+        android:id="@+id/nonet_ll_cot"
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+        <ImageView
+            android:layout_width="96px"
+            android:layout_height="96px"
+            android:layout_gravity="center"
+            android:src="@drawable/noconnection"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:textSize="15sp"
+            android:text="Low or no Internet Connection"/>
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/retry"
+            android:text="Retry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+        android:textStyle="italic"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/subcategories"
+        android:id="@+id/textView26"
+        android:layout_toRightOf="@+id/nonet_ll_cot"
+        android:layout_toEndOf="@+id/nonet_ll_cot"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="30dp" />
+   </RelativeLayout>
+</RelativeLayout>

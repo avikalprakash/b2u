@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+   >
+
+    <!--<TextView-->
+        <!--android:id="@+id/fab"-->
+        <!--android:layout_width="50dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_gravity="bottom|end"-->
+        <!--android:layout_margin="@dimen/fab_margin"-->
+        <!--android:text="0"-->
+        <!--android:textSize="14dp"-->
+        <!--android:gravity="center"-->
+        <!--android:textColor="@color/Background"-->
+        <!--android:textStyle="bold"-->
+        <!--android:paddingTop="15dp"-->
+        <!--android:visibility="gone"-->
+        <!--android:background="@drawable/bucket" />-->
+    <include layout="@layout/content_main" />
+<android.support.design.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:fitsSystemWindows="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+
+            android:background="#e70026">
+
+            <include layout="@layout/header" />
+        </android.support.v7.widget.Toolbar>
+      <!--  <android.support.design.widget.TabLayout
+            android:id="@+id/tablayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/side_nav_bar"
+            android:minHeight="?attr/actionBarSize"
+            app:tabGravity="fill"
+            app:tabMode="scrollable"/>-->
+        <!-- <include layout="@layout/header2"/>-->
+    </android.support.design.widget.AppBarLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpagertab"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
+</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>
