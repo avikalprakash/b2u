@@ -81,7 +81,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 //Rj
 
-public class AddtoCartMobileMan extends Fragment {
+public class AddtoCartMobile extends Fragment {
 
     private static final int SHOW_PROCESS_DIALOG = 1;
     private static final int HIDE_PROCESS_DIALOG = 0;
@@ -153,7 +153,7 @@ private String URL_SOAP_LOGIN = "http://bshop2u.com/apirest/soap_login";
     SharedPreferences.Editor editor;
     Context context;
     SessionManagement sessionManagement;
-    public AddtoCartMobileMan() {
+    public AddtoCartMobile() {
         // Required empty public constructor
     }
     public byte[] intToBytes( final int i ) {

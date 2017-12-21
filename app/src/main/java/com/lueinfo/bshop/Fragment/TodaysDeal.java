@@ -28,7 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.lueinfo.bshop.Adapter.AddtoCartMobileMan;
+import com.lueinfo.bshop.Adapter.AddtoCartMobile;
 import com.lueinfo.bshop.Adapter.ItemEntity;
 import com.lueinfo.bshop.Adapter.TodaysDealAdapter;
 import com.lueinfo.bshop.Adapter.Utils;
@@ -198,7 +198,7 @@ public class TodaysDeal extends Fragment implements AdapterView.OnItemClickListe
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         String entityId=cotegory_list.get(i).getId();
         String image=cotegory_list.get(i).getImage();
-        Intent intent=new Intent(getActivity(),AddtoCartMobileMan.class);
+        Intent intent=new Intent(getActivity(),AddtoCartMobile.class);
         intent.putExtra("KeyValue",entityId);
         intent.putExtra("image",image);
         startActivity(intent);
