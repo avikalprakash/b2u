@@ -77,6 +77,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static android.content.Context.MODE_PRIVATE;
+//avikal
 //
 public class AddtoCartMobile extends Fragment {
 
