@@ -34,7 +34,9 @@ import com.lueinfo.bshop.Database.DatabaseHelper;
 import com.lueinfo.bshop.Fragment.AllCarts;
 import com.lueinfo.bshop.Fragment.CotegoriesFragment;
 import com.lueinfo.bshop.Fragment.HomeMain;
+import com.lueinfo.bshop.Fragment.IntroFragment;
 import com.lueinfo.bshop.Fragment.LogOut;
+import com.lueinfo.bshop.Fragment.QrFragment;
 import com.lueinfo.bshop.Fragment.TodaysDeal;
 
 import java.util.ArrayList;
@@ -367,15 +369,31 @@ viewpager.setAdapter(viewpageradapter);
             drawer.closeDrawers();*/
         }
         else if(id==R.id.intriduceqr){
-            Intent i2 =new Intent(MainActivity.this, QRActivity.class);
-            startActivity(i2);
+//            Intent i2 =new Intent(MainActivity.this, QRActivity.class);
+//            startActivity(i2);
+
+            QrFragment todaysDeal = new QrFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, todaysDeal);
+            transaction.addToBackStack(null);
+            transaction.commit() ;
+            headertext.setText("Qr Activity");
+
         //    m.toast(this,"Intriducer Qode");
         //    drawer.closeDrawers();
 
         }
         else if(id==R.id.introduce){
-           Intent i=new Intent(MainActivity.this, IntroducerActivity.class);
-            startActivity(i);
+//           Intent i=new Intent(MainActivity.this, IntroducerActivity.class);
+//            startActivity(i);
+
+            IntroFragment todaysDeal = new IntroFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, todaysDeal);
+            transaction.addToBackStack(null);
+            transaction.commit() ;
+            headertext.setText("Introducer");
+
         }
 //
         else if (id == R.id.lang) {
