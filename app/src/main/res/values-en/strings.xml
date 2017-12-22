@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Bshop</string>
+    <string name="app_name">Bshops</string>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

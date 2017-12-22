@@ -45,7 +45,7 @@ import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.CAMERA;
 
 //import com.jeptag.organization.lueinfo.Activity.NFCActivity;
-
+//Avikal
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -325,10 +325,6 @@ viewpager.setAdapter(viewpageradapter);
             home = new HomeMain();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.container, home);
-           // viewpager1.setCurrentItem();
-            // transaction.addToBackStack(null);
-            // Commit the transaction
-
             transaction.commit();
 
 
@@ -369,8 +365,6 @@ viewpager.setAdapter(viewpageradapter);
         else if(id==R.id.intriduceqr){
             Intent i2 =new Intent(MainActivity.this, QRActivity.class);
             startActivity(i2);
-        //    m.toast(this,"Intriducer Qode");
-        //    drawer.closeDrawers();
 
         }
         else if(id==R.id.introduce){
@@ -430,7 +424,6 @@ viewpager.setAdapter(viewpageradapter);
         }
 
         else if (id ==R.id.login){
-//            Toast.makeText(getApplicationContext(),"login",Toast.LENGTH_LONG).show();
             Intent intent=new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
@@ -495,10 +488,6 @@ viewpager.setAdapter(viewpageradapter);
                     }
                 }catch (Exception e){}
 
-                // email
-//                String email = user1.get(session.KEY_EMAIL);
-//                m.log("EMAIL<><><><>"+email);
-//            navtext.setText(email);
             }
         }
     }
