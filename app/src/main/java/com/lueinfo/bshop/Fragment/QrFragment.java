@@ -1,4 +1,5 @@
-package com.lueinfo.bshop;
+package com.lueinfo.bshop.Fragment;
+
 
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
@@ -9,10 +10,13 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +28,8 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.lueinfo.bshop.QRActivity;
+import com.lueinfo.bshop.R;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -34,44 +40,53 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class QrFragment extends Fragment implements View.OnClickListener {
 
-public class QRActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView mintronametxt, mintrophonetxt;
     ImageView mqrimg,mshareimage,mbackimage;
     Bitmap myBitmap;
     private ProgressDialog pDialog;
+    Button msharebtn;
+    public QrFragment() {
+        // Required empty public constructor
+    }
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_qr);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view =  inflater.inflate(R.layout.fragment_qr, container, false);
 
-        mshareimage = (ImageView) findViewById(R.id.share_image);
-        mshareimage.setOnClickListener(this);
-        mqrimg = (ImageView) findViewById(R.id.imageQR);
-        mbackimage = (ImageView) findViewById(R.id.back_image);
-        mbackimage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                QRActivity.this.finish();
-            }
-        });
-        mintronametxt = (TextView) findViewById(R.id.introducerName);
+        msharebtn = (Button) view.findViewById(R.id.share_btn);
+        msharebtn.setOnClickListener(this);
+        mqrimg = (ImageView) view.findViewById(R.id.imageQR);
+//        mbackimage = (ImageView) view.findViewById(R.id.back_image);
+//        mbackimage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getActivity().finish();
+//            }
+//        });
+        mintronametxt = (TextView) view.findViewById(R.id.introducerName);
 
-        mintrophonetxt = (TextView) findViewById(R.id.introducerContact);
+        mintrophonetxt = (TextView) view.findViewById(R.id.introducerContact);
         populatedata();
-
+        return  view;
     }
 
     public void populatedata() {
 
-        pDialog = new ProgressDialog(QRActivity.this);
+        pDialog = new ProgressDialog(getContext());
         // Showing progress dialog before making http request
         pDialog.setMessage("Loading...");
         pDialog.show();
 
-        SharedPreferences preferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        SharedPreferences preferences = getContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         String userid = preferences.getString("id", "");
 
         final String url = "http://cloud9.condoassist2u.com/api/getQrCode/"+userid;
@@ -88,7 +103,7 @@ public class QRActivity extends AppCompatActivity implements View.OnClickListene
                             boolean check  = objone.getBoolean("error");
                             if(check) {
 
-                                AlertDialog.Builder builder = new AlertDialog.Builder(QRActivity.this);
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                                 builder.setMessage("Please Try Again")
                                         .setNegativeButton("ok", null)
                                         .create()
@@ -97,14 +112,14 @@ public class QRActivity extends AppCompatActivity implements View.OnClickListene
 
                                 JSONObject jobj  = objone.getJSONObject("message");
 
-                                SharedPreferences preferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                                SharedPreferences preferences = getContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = preferences.edit();
                                 editor.putBoolean("lock",true);
                                 editor.apply();
 
                                 mintronametxt.setText(jobj.getString("introducer_name"));
                                 mintrophonetxt.setText(jobj.getString("introducer_phone"));
-                                Picasso.with(getApplicationContext()).load(jobj.getString("qr_image")).into(mqrimg);
+                                Picasso.with(getContext()).load(jobj.getString("qr_image")).into(mqrimg);
                             }
 
                         } catch (JSONException e) {
@@ -120,7 +135,7 @@ public class QRActivity extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(QRActivity.this, "You Have Some Connectivity Issue..", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "You Have Some Connectivity Issue..", Toast.LENGTH_LONG).show();
                 }
                 hidePDialog();
 
@@ -128,7 +143,7 @@ public class QRActivity extends AppCompatActivity implements View.OnClickListene
         });
         {
 
-            RequestQueue requestQueue = Volley.newRequestQueue(QRActivity.this);
+            RequestQueue requestQueue = Volley.newRequestQueue(getContext());
             requestQueue.add(movieReq);
         }
 
@@ -150,13 +165,8 @@ public class QRActivity extends AppCompatActivity implements View.OnClickListene
     }
 
     @Override
-    public void onBackPressed() {
-       super.onBackPressed();
-    }
-
-    @Override
     public void onClick(View v) {
-        View v1 = getWindow().getDecorView().getRootView();
+        View v1 = getActivity().getWindow().getDecorView().getRootView();
         v1.setDrawingCacheEnabled(true);
         myBitmap = v1.getDrawingCache();
         saveBitmap(myBitmap);
@@ -192,9 +202,10 @@ public class QRActivity extends AppCompatActivity implements View.OnClickListene
         try {
             startActivity(Intent.createChooser(intent, "Share Screenshot"));
         } catch (ActivityNotFoundException e) {
-            Toast.makeText(getApplicationContext(), "No App Available", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "No App Available", Toast.LENGTH_SHORT).show();
         }
     }
+
 
 
 }
