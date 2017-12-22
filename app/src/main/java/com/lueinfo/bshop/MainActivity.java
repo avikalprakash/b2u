@@ -170,10 +170,18 @@ tablayout.addTab(tablayout.newTab());
         navigationView.getMenu().findItem(R.id.home).setVisible(true);
         if(sessionManagement.isLoggedIn()) {
             navigationView.getMenu().findItem(R.id.Logout).setVisible(true);
+            navigationView.getMenu().findItem(R.id.myaccount).setVisible(true);
+            navigationView.getMenu().findItem(R.id.myorders).setVisible(true);
+            navigationView.getMenu().findItem(R.id.mywishlist).setVisible(true);
+            navigationView.getMenu().findItem(R.id.mycart).setVisible(true);
             navigationView.getMenu().findItem(R.id.login).setVisible(false);
         }else {
             navigationView.getMenu().findItem(R.id.Logout).setVisible(false);
             navigationView.getMenu().findItem(R.id.login).setVisible(true);
+            navigationView.getMenu().findItem(R.id.myaccount).setVisible(false);
+            navigationView.getMenu().findItem(R.id.myorders).setVisible(false);
+            navigationView.getMenu().findItem(R.id.mywishlist).setVisible(false);
+            navigationView.getMenu().findItem(R.id.mycart).setVisible(false);
 
         }
         View header = navigationView.getHeaderView(0);
