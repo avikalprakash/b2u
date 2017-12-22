@@ -32,6 +32,7 @@ import com.lueinfo.bshop.Adapter.Message;
 import com.lueinfo.bshop.Adapter.SessionManagement;
 import com.lueinfo.bshop.Database.DatabaseHelper;
 import com.lueinfo.bshop.Fragment.AllCarts;
+import com.lueinfo.bshop.Fragment.ContactFragment;
 import com.lueinfo.bshop.Fragment.CotegoriesFragment;
 import com.lueinfo.bshop.Fragment.HomeMain;
 import com.lueinfo.bshop.Fragment.IntroFragment;
@@ -248,7 +249,6 @@ viewpager.setAdapter(viewpageradapter);
         }
     }
 
-
 // Permission giving at runtime
 
     private void checkRunTimePermission() {
@@ -336,19 +336,23 @@ viewpager.setAdapter(viewpageradapter);
 
 
         } else if (id == R.id.categories) {
+
             CotegoriesFragment cotegoryFragment = new CotegoriesFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.container, cotegoryFragment);
             transaction.addToBackStack(null);
             transaction.commit();
             headertext.setText("CATEGORY");
+
         }else if (id == R.id.hotdeal_nav){
+
             TodaysDeal todaysDeal = new TodaysDeal();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.container, todaysDeal);
             transaction.addToBackStack(null);
             transaction.commit() ;
             headertext.setText("DEALS");
+
         }
         else if(id==R.id.noti_draw){
  //           m.toast(this,"Notification comming soon .....");
@@ -402,8 +406,21 @@ viewpager.setAdapter(viewpageradapter);
             startActivity(intent);
         }
         else if(id == R.id.Contactus) {
-            Intent intent =new Intent(getApplicationContext(), ContactUs.class);
-            startActivity(intent);
+
+
+//            Intent intent =new Intent(getApplicationContext(), ContactUs.class);
+//            startActivity(intent);
+
+            ContactFragment todaysDeal = new ContactFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, todaysDeal);
+            transaction.addToBackStack(null);
+            transaction.commit() ;
+            headertext.setText("ContactUs");
+
+
+
+
         }else if(id == R.id.myorders) {
 //            sessionManagement = new SessionManagement(this);
 //            if(sessionManagement.isLoggedIn()) {

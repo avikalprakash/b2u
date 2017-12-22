@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    >
+    <!--<include layout="@layout/header1"></include>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+
+        <EditText
+            android:id="@+id/to"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            />
+
+        <EditText
+            android:id="@+id/subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+
+            android:hint="@string/subject"
+            android:inputType="textEmailSubject"
+            />
+
+        <EditText
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="185dp"
+
+
+            android:ems="10"
+            android:hint="@string/message"
+            android:gravity="top"
+            android:inputType="text|textLongMessage"
+            />
+
+        <Button
+            android:id="@+id/contactsend"
+            android:layout_width="100dp"
+            android:background="#e70026"
+            android:layout_gravity="end"
+            android:textColor="#ffffff"
+            android:textSize="18dp"
+            android:layout_height="wrap_content"
+            android:text="@string/send" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="31dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/Background"
+            android:layout_height="wrap_content"
+            android:text="66, Jalan Icon City, Icon City,"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/Background"
+            android:layout_height="wrap_content"
+            android:text="14000 Bukit Mertajam,"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Background"
+            android:layout_gravity="center"
+            android:text="Pulau Pinang, Malaysia"/>
+    </LinearLayout>
+</LinearLayout>
