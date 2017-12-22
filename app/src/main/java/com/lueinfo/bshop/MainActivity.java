@@ -45,7 +45,6 @@ import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.CAMERA;
 
 //import com.jeptag.organization.lueinfo.Activity.NFCActivity;
-//Avikal
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
