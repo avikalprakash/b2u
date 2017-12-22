@@ -76,7 +76,6 @@ public class QrFragment extends Fragment implements View.OnClickListener {
 
         mintrophonetxt = (TextView) view.findViewById(R.id.introducerContact);
         populatedata();
-
         return  view;
     }
 
