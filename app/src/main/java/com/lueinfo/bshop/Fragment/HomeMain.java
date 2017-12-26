@@ -409,15 +409,15 @@ RecyclerView listViewcategory;
             try {
                 JSONObject jsonObject=new JSONObject(s);
                 String department=jsonObject.getString("shop_by_department");
-                String slideShow=jsonObject.getString("slideshow");
+               // String slideShow=jsonObject.getString("slideshow");
                 String productPromotion=jsonObject.getString("product_promotions");
                 String newproduct=jsonObject.getString("new_products");
                 JSONObject homedepartment=new JSONObject(department);
-                JSONObject slideshow=new JSONObject(slideShow);
+              //  JSONObject slideshow=new JSONObject(slideShow);
                 JSONObject productPromotions=new JSONObject(productPromotion);
                 JSONObject newproducts=new JSONObject(newproduct);
                  messageProductPromotion=productPromotions.getString("message");
-                 messageSlide=slideshow.getString("message");
+               //  messageSlide=slideshow.getString("message");
                  messagedeptment=homedepartment.getString("message");
                 Log.d("HELLO<><><><>dept",messagedeptment);
                 messagenewproduct=newproducts.getString("message");
@@ -504,7 +504,7 @@ RecyclerView listViewcategory;
 
 
             //for slide shop with message (messageSlide)
-            try {
+    /*        try {
 
                 JSONArray slidShowArry = new JSONArray(messageSlide);
                 for (int j = 0; j < slidShowArry.length(); j++) {
@@ -518,7 +518,7 @@ RecyclerView listViewcategory;
 
             }catch (Exception e){
                 e.printStackTrace();
-            }
+            }*/
 
 
 
