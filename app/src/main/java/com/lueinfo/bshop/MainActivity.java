@@ -392,10 +392,6 @@ tablayout.addTab(tablayout.newTab());
             transaction.commit() ;
             headertext.setText("Qr Activity");
 
-            //    m.toast(this,"Intriducer Qode");
-            //    drawer.closeDrawers();
-
-
         }
         else if(id==R.id.introduce){
 //           Intent i=new Intent(MainActivity.this, IntroducerActivity.class);
