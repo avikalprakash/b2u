@@ -385,12 +385,6 @@ tablayout.addTab(tablayout.newTab());
         }
         else if(id==R.id.intriduceqr){
 
-           /* Intent i2 =new Intent(MainActivity.this, QRActivity.class);
-            startActivity(i2);*/
-
-//            Intent i2 =new Intent(MainActivity.this, QRActivity.class);
-//            startActivity(i2);
-
             QrFragment todaysDeal = new QrFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.container, todaysDeal);
