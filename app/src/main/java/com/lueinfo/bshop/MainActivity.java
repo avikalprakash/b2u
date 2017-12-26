@@ -413,7 +413,7 @@ tablayout.addTab(tablayout.newTab());
             onchooselang();
         }
         else if(id == R.id.Contactus) {
-<<<<<<< HEAD
+
           /*  Intent intent =new Intent(getApplicationContext(), ContactUs.class);
             startActivity(intent);*/
             ContactFragment contactFragment = new ContactFragment();
@@ -421,23 +421,23 @@ tablayout.addTab(tablayout.newTab());
             transaction.replace(R.id.container, contactFragment);
             transaction.addToBackStack(null);
             transaction.commit() ;
-=======
+
 
 
 //            Intent intent =new Intent(getApplicationContext(), ContactUs.class);
 //            startActivity(intent);
 
             ContactFragment todaysDeal = new ContactFragment();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.container, todaysDeal);
-            transaction.addToBackStack(null);
-            transaction.commit() ;
+            FragmentTransaction transaction123 = getSupportFragmentManager().beginTransaction();
+            transaction123.replace(R.id.container, todaysDeal);
+            transaction123.addToBackStack(null);
+            transaction123.commit() ;
             headertext.setText("ContactUs");
 
 
 
 
->>>>>>> d46a0e1575f3499faaf33c94b7a3fe6c19a340ea
+
         }else if(id == R.id.myorders) {
 //            sessionManagement = new SessionManagement(this);
 //            if(sessionManagement.isLoggedIn()) {
