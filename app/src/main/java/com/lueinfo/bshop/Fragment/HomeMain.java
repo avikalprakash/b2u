@@ -335,7 +335,7 @@ RecyclerView listViewcategory;
             return false;
         }
     });
-
+//
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
