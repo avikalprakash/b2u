@@ -3,7 +3,9 @@ package com.lueinfo.bshop;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -16,10 +18,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,20 +32,26 @@ import android.widget.Toast;
 
 import com.lueinfo.bshop.Adapter.Details;
 import com.lueinfo.bshop.Adapter.ItemEntity;
+import com.lueinfo.bshop.Adapter.LanguageDatabase;
 import com.lueinfo.bshop.Adapter.Message;
+import com.lueinfo.bshop.Adapter.ReadLanguage;
 import com.lueinfo.bshop.Adapter.SessionManagement;
 import com.lueinfo.bshop.Database.DatabaseHelper;
 import com.lueinfo.bshop.Fragment.AllCarts;
+import com.lueinfo.bshop.Fragment.ContactFragment;
 import com.lueinfo.bshop.Fragment.CotegoriesFragment;
 import com.lueinfo.bshop.Fragment.HomeMain;
 import com.lueinfo.bshop.Fragment.IntroFragment;
 import com.lueinfo.bshop.Fragment.LogOut;
+import com.lueinfo.bshop.Fragment.NotificationFragment;
+import com.lueinfo.bshop.Fragment.OfferZone;
 import com.lueinfo.bshop.Fragment.QrFragment;
 import com.lueinfo.bshop.Fragment.TodaysDeal;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.CAMERA;
@@ -67,6 +77,7 @@ public class MainActivity extends AppCompatActivity
     private List<ItemEntity> order_des_List = new ArrayList<>();
     SessionManagement sessionManagement;
     String name;
+    String log="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -345,6 +356,11 @@ tablayout.addTab(tablayout.newTab());
             headertext.setText("DEALS");
         }
         else if(id==R.id.noti_draw){
+            NotificationFragment notificationFragment = new NotificationFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, notificationFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
             //           m.toast(this,"Notification comming soon .....");
 //            headertext.setText("HOME");
         }
@@ -361,11 +377,16 @@ tablayout.addTab(tablayout.newTab());
         else if(id==R.id.offer_draw){
        /*     m.toast(this,"Offer Zone Comming soon...");
             drawer.closeDrawers();*/
+            OfferZone offerZone = new OfferZone();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, offerZone);
+            transaction.addToBackStack(null);
+            transaction.commit();
         }
         else if(id==R.id.intriduceqr){
 
-            Intent i2 =new Intent(MainActivity.this, QRActivity.class);
-            startActivity(i2);
+           /* Intent i2 =new Intent(MainActivity.this, QRActivity.class);
+            startActivity(i2);*/
 
 //            Intent i2 =new Intent(MainActivity.this, QRActivity.class);
 //            startActivity(i2);
@@ -397,12 +418,18 @@ tablayout.addTab(tablayout.newTab());
 //
         else if (id == R.id.lang) {
 
-            Intent intent=new Intent(getApplicationContext(), Language.class);
-            startActivity(intent);
+          /*  Intent intent=new Intent(getApplicationContext(), Language.class);
+            startActivity(intent);*/
+            onchooselang();
         }
         else if(id == R.id.Contactus) {
-            Intent intent =new Intent(getApplicationContext(), ContactUs.class);
-            startActivity(intent);
+          /*  Intent intent =new Intent(getApplicationContext(), ContactUs.class);
+            startActivity(intent);*/
+            ContactFragment contactFragment = new ContactFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, contactFragment);
+            transaction.addToBackStack(null);
+            transaction.commit() ;
         }else if(id == R.id.myorders) {
 //            sessionManagement = new SessionManagement(this);
 //            if(sessionManagement.isLoggedIn()) {
@@ -515,5 +542,93 @@ tablayout.addTab(tablayout.newTab());
         }
     }
 
+    private String getResString(int resId){
+        return getResources().getString(resId);
+    }
+
+    public void onchooselang()
+    {
+
+        try {
+            final String s[] = {getResString(R.string.en), getResString(R.string.zh)};
+            AlertDialog.Builder adb = new AlertDialog.Builder(MainActivity.this);
+            adb.setTitle(R.string.txt_setting_changeyourlocale);
+            final String lan = ReadLanguage.read(MainActivity.this);
+            adb.setAdapter(new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, s), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    switch (which) {
+                        case -1:
+
+                            break;
+                        case 0:
+                            log = "EN";
+                            editor.putString("log", log);
+                            editor.commit();
+                            break;
+                        case 1:
+//                           log = "VI";
+                            log = "ZH";
+                            editor.putString("log", log);
+                            editor.commit();
+                            break;
+
+                        default:
+
+                            break;
+                    }
+
+                    if (!log.equals(lan)) {
+                        showRestartConfirmDlg(log);
+                    }
+                }
+            });
+            adb.show();
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(this,"Exception "+e, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void showRestartConfirmDlg(final String log)
+    {
+        AlertDialog.Builder adb=new AlertDialog.Builder(MainActivity.this);
+        adb.setTitle(getResources().getString(R.string.msg_change_locale));
+        adb.setMessage(getResources().getString(R.string.languageischanging));
+        adb.setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                changeLocale(log);
+            }
+        });
+        adb.setNegativeButton("Cancel",null);
+        adb.show();
+    }
+
+    private void changeLocale(String language_code){
+        Resources res = getResources();
+        // Change locale settings in the app.
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+        conf.locale = new Locale(language_code.toLowerCase());
+        res.updateConfiguration(conf, dm);
+
+        LanguageDatabase languageDatabase=new LanguageDatabase(MainActivity.this);
+        languageDatabase.open();
+        languageDatabase.update(language_code);
+        languageDatabase.close();
+        restartApp();
+    }
+
+    private void restartApp(){
+        Intent i = getBaseContext().getPackageManager()
+                .getLaunchIntentForPackage( getBaseContext().getPackageName() );
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        // i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+    }
 
 }

@@ -46,6 +46,7 @@ import com.lueinfo.bshop.Adapter.RecyclerItemClickListener;
 import com.lueinfo.bshop.Adapter.SessionManagement;
 import com.lueinfo.bshop.Adapter.Utils;
 import com.lueinfo.bshop.Database.DatabaseHelper;
+import com.lueinfo.bshop.MainActivity;
 import com.lueinfo.bshop.R;
 import com.roger.catloadinglibrary.CatLoadingView;
 import com.viewpagerindicator.CirclePageIndicator;

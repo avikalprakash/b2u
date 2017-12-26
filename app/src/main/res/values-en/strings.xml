@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">Bshops</string>
-    <string name="title_activity_main">MainActivity</string>
+    <!--<string name="title_activity_main">MainActivity</string>-->
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="product_details">product_details</string>
+    <string name="vendor_details">vendor_details</string>
+    <string name="comments">comments</string>
+    <string name="GoShopping">Go Shopping Now</string>
+    <string name="some_text">some_text</string>
+    <string name="chk_offline">chk_offline</string>
+    <string name="chk_online">chk_online</string>
+    <string name="GoToCart">Go To Cart</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -121,7 +130,7 @@
     <string name="Oder_Summary">Oder Summary</string>
     <string name="nfc_disabled">nfc_disabled</string>
     <string name="Product_is_not_certified_by_jeptag">Product is not certified by jeptag</string>
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDhu28wCRphjMFHk90p36O-o6ARNn5Wxow</string>
+  <!--  <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDhu28wCRphjMFHk90p36O-o6ARNn5Wxow</string>-->
     <string name="Product_is_certified_by_jeptag">Product is certified by Jeptag</string>
     <string name="YourAddress">Your Address</string>
     <string name="subcategories">SubCategories</string>

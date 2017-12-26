@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lueinfo.bshop.MainActivity;
 import com.lueinfo.bshop.R;
 import com.squareup.picasso.Picasso;
 

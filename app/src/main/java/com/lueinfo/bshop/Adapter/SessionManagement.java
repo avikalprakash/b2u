@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import com.lueinfo.bshop.LoginActivity;
+import com.lueinfo.bshop.MainActivity;
 
 import java.util.HashMap;
 
