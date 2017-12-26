@@ -257,7 +257,6 @@ tablayout.addTab(tablayout.newTab());
         }
     }
 
-
 // Permission giving at runtime
 
     private void checkRunTimePermission() {
@@ -341,19 +340,23 @@ tablayout.addTab(tablayout.newTab());
 
 
         } else if (id == R.id.categories) {
+
             CotegoriesFragment cotegoryFragment = new CotegoriesFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.container, cotegoryFragment);
             transaction.addToBackStack(null);
             transaction.commit();
             headertext.setText("CATEGORY");
+
         }else if (id == R.id.hotdeal_nav){
+
             TodaysDeal todaysDeal = new TodaysDeal();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.container, todaysDeal);
             transaction.addToBackStack(null);
             transaction.commit() ;
             headertext.setText("DEALS");
+
         }
         else if(id==R.id.noti_draw){
             NotificationFragment notificationFragment = new NotificationFragment();
@@ -410,6 +413,7 @@ tablayout.addTab(tablayout.newTab());
             onchooselang();
         }
         else if(id == R.id.Contactus) {
+<<<<<<< HEAD
           /*  Intent intent =new Intent(getApplicationContext(), ContactUs.class);
             startActivity(intent);*/
             ContactFragment contactFragment = new ContactFragment();
@@ -417,6 +421,23 @@ tablayout.addTab(tablayout.newTab());
             transaction.replace(R.id.container, contactFragment);
             transaction.addToBackStack(null);
             transaction.commit() ;
+=======
+
+
+//            Intent intent =new Intent(getApplicationContext(), ContactUs.class);
+//            startActivity(intent);
+
+            ContactFragment todaysDeal = new ContactFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, todaysDeal);
+            transaction.addToBackStack(null);
+            transaction.commit() ;
+            headertext.setText("ContactUs");
+
+
+
+
+>>>>>>> d46a0e1575f3499faaf33c94b7a3fe6c19a340ea
         }else if(id == R.id.myorders) {
 //            sessionManagement = new SessionManagement(this);
 //            if(sessionManagement.isLoggedIn()) {

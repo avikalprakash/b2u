@@ -63,7 +63,7 @@ public class ContactUs extends AppCompatActivity {
 
     public void sendData(){
 
-        To=  edittextto.getText().toString();
+        To =  edittextto.getText().toString();
         Subject=edittextsubject.getText().toString();
         Message=edittextmessage.getText().toString();
         Intent mail =new Intent(Intent.ACTION_SEND);

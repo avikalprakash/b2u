@@ -4,7 +4,10 @@ package com.lueinfo.bshop.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+<<<<<<< HEAD
 import android.support.v4.view.AbsSavedState;
+=======
+>>>>>>> d46a0e1575f3499faaf33c94b7a3fe6c19a340ea
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
