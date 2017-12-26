@@ -394,9 +394,6 @@ tablayout.addTab(tablayout.newTab());
 
         }
         else if(id==R.id.introduce){
-//           Intent i=new Intent(MainActivity.this, IntroducerActivity.class);
-//            startActivity(i);
-
             IntroFragment todaysDeal = new IntroFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.container, todaysDeal);
