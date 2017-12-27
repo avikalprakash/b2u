@@ -61,6 +61,10 @@
             android:icon="@drawable/qr"
             android:title="@string/intqr"/>
         <item
+            android:id="@+id/event"
+            android:icon="@drawable/calendarev"
+            android:title="@string/event"/>
+        <item
             android:id="@+id/login"
             android:icon="@drawable/login"
             android:title="@string/Login_name"/>

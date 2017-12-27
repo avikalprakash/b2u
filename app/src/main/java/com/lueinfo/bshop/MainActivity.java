@@ -40,8 +40,8 @@ import com.lueinfo.bshop.Database.DatabaseHelper;
 import com.lueinfo.bshop.Fragment.AllCarts;
 import com.lueinfo.bshop.Fragment.ContactFragment;
 import com.lueinfo.bshop.Fragment.CotegoriesFragment;
+import com.lueinfo.bshop.Fragment.EventFragment;
 import com.lueinfo.bshop.Fragment.HomeMain;
-import com.lueinfo.bshop.Fragment.HometFragment;
 import com.lueinfo.bshop.Fragment.IntroFragment;
 import com.lueinfo.bshop.Fragment.LogOut;
 import com.lueinfo.bshop.Fragment.NotificationFragment;
@@ -61,7 +61,7 @@ import static android.Manifest.permission.CAMERA;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     AlertDialog alertDialog;
-    HometFragment home;
+    HomeMain home;
     ImageView headerimage;
     ViewPager viewpager1;
     DatabaseHelper databaseHelper;
@@ -208,7 +208,7 @@ tablayout.addTab(tablayout.newTab());
             }
         });*/
 
-        home = new HometFragment();
+        home = new HomeMain();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, home);
         transaction.commit();
@@ -218,13 +218,13 @@ tablayout.addTab(tablayout.newTab());
         frame_head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* AllCarts allCarts = new AllCarts();
+                AllCarts allCarts = new AllCarts();
                 if (!allCarts.isInLayout()) {
                     FragmentTransaction transaction = MainActivity.this.getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.container, allCarts);
                     transaction.addToBackStack(null);
                     transaction.commit();
-                }*/
+                }
             }
         });
         //hide header
@@ -298,10 +298,10 @@ tablayout.addTab(tablayout.newTab());
 
                     if (CameraPermission && ReadContactsPermission ) {
 
-                      //  Toast.makeText(MainActivity.this, "Permission Granted", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Permission Granted", Toast.LENGTH_LONG).show();
                     }
                     else {
-                   //     Toast.makeText(MainActivity.this,"Permission Denied", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this,"Permission Denied", Toast.LENGTH_LONG).show();
 
                     }
                 }
@@ -333,8 +333,7 @@ tablayout.addTab(tablayout.newTab());
         if (id == R.id.home) {
             // Handle the camera action
 
-            home = new HometFragment();
-           // HomeMain h = new HomeMain();
+            home = new HomeMain();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.container, home);
             transaction.commit();
@@ -439,7 +438,6 @@ tablayout.addTab(tablayout.newTab());
 
 
 
-
         }else if(id == R.id.myorders) {
 //            sessionManagement = new SessionManagement(this);
 //            if(sessionManagement.isLoggedIn()) {
@@ -486,6 +484,14 @@ tablayout.addTab(tablayout.newTab());
         else if (id ==R.id.login){
             Intent intent=new Intent(this, LoginActivity.class);
             startActivity(intent);
+        }
+        else if (id ==R.id.event){
+            EventFragment todaysDeal = new EventFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, todaysDeal);
+            transaction.addToBackStack(null);
+            transaction.commit() ;
+            headertext.setText("Event");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

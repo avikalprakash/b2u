@@ -14,5 +14,6 @@
     <color name="textColorLightSecondry">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="fragmentbackground">#FFFFFF</color>
+    <color name="ncolor">#fff8dc</color>
 
 </resources>
