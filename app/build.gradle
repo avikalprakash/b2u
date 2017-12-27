@@ -41,6 +41,8 @@ dependencies {
     compile 'com.roger.catloadinglibrary:catloadinglibrary:1.0.1'
     compile 'org.apmem.tools:layouts:1.10@aar'
     compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.roomorama:caldroid:3.0.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'
     compile 'com.facebook.android:facebook-android-sdk:4.15.0'
     testCompile 'junit:junit:4.12'

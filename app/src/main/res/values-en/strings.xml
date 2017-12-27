@@ -50,6 +50,7 @@
     <string name="EnterPercentage">Enter Percentage</string>
     <string name="Result">Result</string>
     <string name="Calculate">Calculate</string>
+    <string name="event">Event</string>
     <string name="LoginUmallzAccount">Login Umallz Account</string>
     <string name="CreateanewUmallzaccount">Create a new Umallz account</string>
 

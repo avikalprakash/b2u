@@ -40,6 +40,7 @@ import com.lueinfo.bshop.Database.DatabaseHelper;
 import com.lueinfo.bshop.Fragment.AllCarts;
 import com.lueinfo.bshop.Fragment.ContactFragment;
 import com.lueinfo.bshop.Fragment.CotegoriesFragment;
+import com.lueinfo.bshop.Fragment.EventFragment;
 import com.lueinfo.bshop.Fragment.HomeMain;
 import com.lueinfo.bshop.Fragment.IntroFragment;
 import com.lueinfo.bshop.Fragment.LogOut;
@@ -437,7 +438,6 @@ tablayout.addTab(tablayout.newTab());
 
 
 
-
         }else if(id == R.id.myorders) {
 //            sessionManagement = new SessionManagement(this);
 //            if(sessionManagement.isLoggedIn()) {
@@ -484,6 +484,14 @@ tablayout.addTab(tablayout.newTab());
         else if (id ==R.id.login){
             Intent intent=new Intent(this, LoginActivity.class);
             startActivity(intent);
+        }
+        else if (id ==R.id.event){
+            EventFragment todaysDeal = new EventFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, todaysDeal);
+            transaction.addToBackStack(null);
+            transaction.commit() ;
+            headertext.setText("Event");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
