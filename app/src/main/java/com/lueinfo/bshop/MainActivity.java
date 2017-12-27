@@ -42,6 +42,7 @@ import com.lueinfo.bshop.Fragment.ContactFragment;
 import com.lueinfo.bshop.Fragment.CotegoriesFragment;
 import com.lueinfo.bshop.Fragment.EventFragment;
 import com.lueinfo.bshop.Fragment.HomeMain;
+import com.lueinfo.bshop.Fragment.HometFragment;
 import com.lueinfo.bshop.Fragment.IntroFragment;
 import com.lueinfo.bshop.Fragment.LogOut;
 import com.lueinfo.bshop.Fragment.NotificationFragment;
@@ -61,7 +62,7 @@ import static android.Manifest.permission.CAMERA;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     AlertDialog alertDialog;
-    HomeMain home;
+    HometFragment home;
     ImageView headerimage;
     ViewPager viewpager1;
     DatabaseHelper databaseHelper;
@@ -208,7 +209,7 @@ tablayout.addTab(tablayout.newTab());
             }
         });*/
 
-        home = new HomeMain();
+        home = new HometFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, home);
         transaction.commit();
@@ -298,10 +299,10 @@ tablayout.addTab(tablayout.newTab());
 
                     if (CameraPermission && ReadContactsPermission ) {
 
-                        Toast.makeText(MainActivity.this, "Permission Granted", Toast.LENGTH_LONG).show();
+                     //   Toast.makeText(MainActivity.this, "Permission Granted", Toast.LENGTH_LONG).show();
                     }
                     else {
-                        Toast.makeText(MainActivity.this,"Permission Denied", Toast.LENGTH_LONG).show();
+                     //   Toast.makeText(MainActivity.this,"Permission Denied", Toast.LENGTH_LONG).show();
 
                     }
                 }
@@ -333,7 +334,7 @@ tablayout.addTab(tablayout.newTab());
         if (id == R.id.home) {
             // Handle the camera action
 
-            home = new HomeMain();
+            home = new HometFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.container, home);
             transaction.commit();

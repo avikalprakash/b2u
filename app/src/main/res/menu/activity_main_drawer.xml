@@ -65,6 +65,10 @@
             android:icon="@drawable/calendarev"
             android:title="@string/event"/>
         <item
+            android:id="@+id/specialPromotion"
+            android:icon="@drawable/promotion"
+            android:title="@string/specialPromotion"/>
+        <item
             android:id="@+id/login"
             android:icon="@drawable/login"
             android:title="@string/Login_name"/>

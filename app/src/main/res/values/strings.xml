@@ -30,6 +30,7 @@
     <string name="action_settings">Settings</string>
     <string name="srch">Search</string>
     <string name="event">Event</string>
+    <string name="specialPromotion">Special Promotion</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
 
     <!-- TODO: Remove or change this placeholder text -->
