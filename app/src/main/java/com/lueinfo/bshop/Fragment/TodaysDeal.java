@@ -1,6 +1,7 @@
 package com.lueinfo.bshop.Fragment;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -207,19 +208,23 @@ public class TodaysDeal extends Fragment implements AdapterView.OnItemClickListe
 
 
     class MyAsync extends AsyncTask<String,Void,String> {
-
+        private ProgressDialog pDialog;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
+            pDialog = new ProgressDialog(getActivity());
+            pDialog.setMessage("loading...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
            // mprogressBar.setIndeterminate(true);
 
         }
 
         @Override
         protected String doInBackground(String... strings) {
-            handler.sendEmptyMessage(SHOW_PROCESS_DIALOG);
+           // handler.sendEmptyMessage(SHOW_PROCESS_DIALOG);
             String s="";
             HttpGet httpget = new HttpGet(strings[0]);
             httpget.setHeader("Accept", "application/json");
@@ -243,7 +248,8 @@ public class TodaysDeal extends Fragment implements AdapterView.OnItemClickListe
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            handler.sendEmptyMessage(HIDE_PROCESS_DIALOG);
+         //   handler.sendEmptyMessage(HIDE_PROCESS_DIALOG);
+            pDialog.dismiss();
             Log.d("onPostExcutea", "" + s);
             cotegory_list.clear();
             try {

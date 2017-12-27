@@ -2,6 +2,7 @@ package com.lueinfo.bshop.Fragment;
 
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
@@ -112,10 +113,15 @@ String lan;
     }
 });
     class MyAsync extends AsyncTask<String,Void,String> {
-
+        private ProgressDialog pDialog;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            pDialog = new ProgressDialog(getActivity());
+            pDialog.setMessage("loading...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
         }
 /*        @Override
         protected String doInBackground(String... strings) {
@@ -127,7 +133,7 @@ String lan;
         }*/
 @Override
 protected String doInBackground(String... params) {
-    handler.sendEmptyMessage(SHOW_PROCESS_DIALOG);
+  //  handler.sendEmptyMessage(SHOW_PROCESS_DIALOG);
     String return_text="";
     try{
         HttpClient httpClient=new DefaultHttpClient();
@@ -167,7 +173,8 @@ protected String doInBackground(String... params) {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            handler.sendEmptyMessage(HIDE_PROCESS_DIALOG);
+           // handler.sendEmptyMessage(HIDE_PROCESS_DIALOG);
+            pDialog.dismiss();
             Log.d("onPostExcute",""+s);
             cotegory_list.clear();
             try {
@@ -181,7 +188,6 @@ protected String doInBackground(String... params) {
                     itemEntity.setId(jobject.getString("entity_id"));
                     Log.d("mckm","cc"+jobject.getString("entity_id"));
                     itemEntity.setName(jobject.getString("name"));
-
                     cotegory_list.add(itemEntity);
                 }
                 Log.d("cotegory_list", "size: " + cotegory_list.size());

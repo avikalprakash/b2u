@@ -46,11 +46,13 @@ holder.textmrp.setText(entity.getMrpPrice());
 holder.textsale.setText(entity.getSalePrice());
 
         String sale=entity.getSalePrice();
-        if(!sale.equals("null")){
-            holder.textmrp.setTextColor(Color.BLACK);
-            holder.textsale.setVisibility(View.VISIBLE);
-           holder. textmrp.setPaintFlags( Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
-        }
+        try {
+            if (!sale.equals("null")) {
+                holder.textmrp.setTextColor(Color.BLACK);
+                holder.textsale.setVisibility(View.VISIBLE);
+                holder.textmrp.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
+            }
+        }catch (Exception e){}
         Picasso.with(context).load(entity.getProductPromotionImage()).into(holder.imageView);
 
     }

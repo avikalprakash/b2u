@@ -2,6 +2,7 @@ package com.lueinfo.bshop.Fragment;
 
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
@@ -114,17 +115,22 @@ text.setText(name);
         }
     });
     class MyAsync extends AsyncTask<String,Void,String> {
-
+         ProgressDialog pDialog;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            pDialog = new ProgressDialog(getActivity());
+            pDialog.setMessage("loading...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
 
            // pb.setIndeterminate(true);
         }
         @Override
         protected String doInBackground(String... Strings) {
 
-            handler.sendEmptyMessage(SHOW_PROCESS_DIALOG);
+          //  handler.sendEmptyMessage(SHOW_PROCESS_DIALOG);
             Log.d("werftghy","iiiiiiiiiiii");
             String s="";
 
@@ -154,9 +160,9 @@ text.setText(name);
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
+            pDialog.dismiss();
             Subcotegory_list.clear();
-            handler.sendEmptyMessage(HIDE_PROCESS_DIALOG);
+         //   handler.sendEmptyMessage(HIDE_PROCESS_DIALOG);
             Log.d("onPostExcute",""+s);
 
             try {

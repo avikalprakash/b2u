@@ -1,6 +1,7 @@
 package com.lueinfo.bshop.Adapter;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -319,10 +320,16 @@ Toast.makeText(getActivity(),"CART FACILITY NOT AVAILABLE NOW .COMMING SOON", To
     }
 
     private class GetShopLogin extends AsyncTask<Void, Void, Void> {
+        ProgressDialog pDialog;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            handler.sendEmptyMessage(SHOW_PROCESS_DIALOG);
+         //   handler.sendEmptyMessage(SHOW_PROCESS_DIALOG);
+            pDialog = new ProgressDialog(getActivity());
+            pDialog.setMessage("loading...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
         }
         @Override
         protected Void doInBackground(Void... arg0) {
@@ -359,7 +366,8 @@ Toast.makeText(getActivity(),"CART FACILITY NOT AVAILABLE NOW .COMMING SOON", To
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            handler.sendEmptyMessage(HIDE_PROCESS_DIALOG);
+          //  handler.sendEmptyMessage(HIDE_PROCESS_DIALOG);
+            pDialog.dismiss();
        /*     if (pDialog.isShowing())
                 pDialog.dismiss();
             populateSpinner()*/;
@@ -502,16 +510,20 @@ public void cart(){
    }
 
     class MyAsync extends AsyncTask<String,Void,String> {
-
+        private ProgressDialog pDialog;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
+            pDialog = new ProgressDialog(getActivity());
+            pDialog.setMessage("loading...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
            // mprogressBar.setIndeterminate(true);
         }
         @Override
         protected String doInBackground(String... strings) {
-            handler.sendEmptyMessage(SHOW_PROCESS_DIALOG);
+          //  handler.sendEmptyMessage(SHOW_PROCESS_DIALOG);
             String s = "";
             HttpGet httpget = new HttpGet(strings[0]);
             httpget.setHeader("Accept", "application/json");
@@ -532,7 +544,7 @@ public void cart(){
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
+            pDialog.dismiss();
 
         }
     }
@@ -562,7 +574,7 @@ public void cart(){
     }
 
     public void dataload(String url, final String lan){
-        handler.sendEmptyMessage(SHOW_PROCESS_DIALOG);
+       // handler.sendEmptyMessage(SHOW_PROCESS_DIALOG);
         RequestQueue que= Volley.newRequestQueue(getActivity());
 
         StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -677,7 +689,8 @@ Log.d("HELLODATA",s);
                 name.setText(Itemname);
 //                salePricetext.setText("MYR"+""+Saleprice);
                 Regularpricetext.setText("MYR"+""+MrpPrice);
-                Descriptiontext.setText(Description);
+                String desc = Description.replace("<p>", "").replace("</p>", "");
+                Descriptiontext.setText(desc);
 //                material.setText(Material);
                 stock.setText(ItemStock);
 //                color.setText(Itemcolor);

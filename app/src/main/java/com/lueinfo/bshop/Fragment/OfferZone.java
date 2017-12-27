@@ -104,7 +104,7 @@ public class OfferZone extends Fragment {
 
         pDialog = new ProgressDialog(getActivity());
         // Showing progress dialog before making http request
-        pDialog.setMessage("Loading...");
+        pDialog.setMessage("loading...");
         pDialog.show();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());

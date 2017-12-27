@@ -196,18 +196,22 @@ headertext=(TextView)findViewById(R.id.header3text);
     }
 
     class MyAsync extends AsyncTask<String,Void,String> {
-
+        private ProgressDialog pDialog;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
+            pDialog = new ProgressDialog(LoginActivity.this);
+            pDialog.setMessage("loading...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
             //pb.setIndeterminate(true);
         }
 
         @Override
         protected String doInBackground(String... Strings) {
 
-            handler.sendEmptyMessage(SHOW_PROCESS_DIALOG);
+           // handler.sendEmptyMessage(SHOW_PROCESS_DIALOG);
             Log.d("werftghy", "iiiiiiiiiiii");
             String s = "";
 
@@ -237,7 +241,8 @@ headertext=(TextView)findViewById(R.id.header3text);
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            handler.sendEmptyMessage(HIDE_PROCESS_DIALOG);
+            pDialog.dismiss();
+          //  handler.sendEmptyMessage(HIDE_PROCESS_DIALOG);
            Loginlist.clear();
             try {
                 JSONObject jsonObject=new JSONObject(s);

@@ -1,6 +1,7 @@
 package com.lueinfo.bshop;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -132,17 +133,21 @@ TextView already_user1,singup,headertext;
 
 
     public class MyAsync extends AsyncTask<String,Void,String> {
-
+        private ProgressDialog pDialog;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
+            pDialog = new ProgressDialog(SignupActivity.this);
+            pDialog.setMessage("loading...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
           //  pb.setIndeterminate(true);
         }
 
         @Override
         protected String doInBackground(String... Strings) {
-            handler.sendEmptyMessage(SHOW_PROCESS_DIALOG);
+          //  handler.sendEmptyMessage(SHOW_PROCESS_DIALOG);
 
             String s = "";
             ArrayList<NameValuePair> postParameters;
@@ -183,7 +188,8 @@ TextView already_user1,singup,headertext;
             @Override
             protected void onPostExecute(String s){
                 super.onPostExecute(s);
-                handler.sendEmptyMessage(HIDE_PROCESS_DIALOG);
+             //   handler.sendEmptyMessage(HIDE_PROCESS_DIALOG);
+                pDialog.dismiss();
                 Log.d("sssss",""+s);
                 try {
                     JSONObject jsonObject=new JSONObject(s);

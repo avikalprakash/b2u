@@ -83,7 +83,7 @@ public class QrFragment extends Fragment implements View.OnClickListener {
 
         pDialog = new ProgressDialog(getContext());
         // Showing progress dialog before making http request
-        pDialog.setMessage("Loading...");
+        pDialog.setMessage("loading...");
         pDialog.show();
 
         SharedPreferences preferences = getContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
