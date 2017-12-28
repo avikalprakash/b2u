@@ -8,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -19,7 +18,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,19 +28,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.lueinfo.bshop.Adapter.Details;
 import com.lueinfo.bshop.Adapter.ItemEntity;
 import com.lueinfo.bshop.Adapter.LanguageDatabase;
 import com.lueinfo.bshop.Adapter.Message;
 import com.lueinfo.bshop.Adapter.ReadLanguage;
 import com.lueinfo.bshop.Adapter.SessionManagement;
 import com.lueinfo.bshop.Database.DatabaseHelper;
-import com.lueinfo.bshop.Fragment.AllCarts;
 import com.lueinfo.bshop.Fragment.ContactFragment;
 import com.lueinfo.bshop.Fragment.CotegoriesFragment;
 import com.lueinfo.bshop.Fragment.EventFragment;
-import com.lueinfo.bshop.Fragment.HomeMain;
-import com.lueinfo.bshop.Fragment.HometFragment;
+import com.lueinfo.bshop.Fragment.HomeFragment;
 import com.lueinfo.bshop.Fragment.IntroFragment;
 import com.lueinfo.bshop.Fragment.LogOut;
 import com.lueinfo.bshop.Fragment.NotificationFragment;
@@ -63,7 +58,7 @@ import static android.Manifest.permission.CAMERA;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     AlertDialog alertDialog;
-    HometFragment home;
+    HomeFragment home;
     ImageView headerimage;
     ViewPager viewpager1;
     DatabaseHelper databaseHelper;
@@ -210,7 +205,7 @@ tablayout.addTab(tablayout.newTab());
             }
         });*/
 
-        home = new HometFragment();
+        home = new HomeFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, home);
         transaction.commit();
@@ -335,7 +330,7 @@ tablayout.addTab(tablayout.newTab());
         if (id == R.id.home) {
             // Handle the camera action
 
-            home = new HometFragment();
+            home = new HomeFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.container, home);
             transaction.commit();
