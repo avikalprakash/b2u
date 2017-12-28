@@ -1,6 +1,7 @@
 package com.lueinfo.bshop;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -37,6 +38,11 @@ public class EventDetail extends AppCompatActivity {
     private ProgressDialog pDialog;
     String from="",s1,s2,eventid = "";
 
+    public static final String LANGUAGE = "log";
+    public static final String MyPref = "MyPref";
+    SharedPreferences sharedpreferences;
+    String language;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +56,9 @@ public class EventDetail extends AppCompatActivity {
         timing3=(TextView) view1.findViewById( R.id.timing3 );
         image_notice=(ImageView)findViewById( R.id.image_notice );
 
+        sharedpreferences=this.getSharedPreferences(MyPref, Context.MODE_PRIVATE);
+
+        language = sharedpreferences.getString(LANGUAGE,"");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById( R.id.fab );
         fab.setOnClickListener( new View.OnClickListener() {
@@ -75,7 +84,7 @@ public class EventDetail extends AppCompatActivity {
         pDialog.show();
 
 
-        final String url = "http://bshop2u.com/apiAdmin/api/event/getEventDetails/"+eventid;
+        final String url = "http://bshop2u.com/apiAdmin/api/event/getEventDetails/"+eventid+"/"+language;
 
         StringRequest movieReq = new StringRequest(url,
                 new Response.Listener<String>() {

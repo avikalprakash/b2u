@@ -2,6 +2,7 @@ package com.lueinfo.bshop.Fragment;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -49,7 +50,10 @@ import java.util.Locale;
  */
 public class EventFragment extends Fragment {
 
-
+    public static final String LANGUAGE = "log";
+    public static final String MyPref = "MyPref";
+    SharedPreferences sharedpreferences;
+    String language;
     RecyclerView mrecylerview;
     ArrayList<CalenderEvensEntity> calenderEvensEntities=new ArrayList<CalenderEvensEntity>();
     private ProgressDialog pDialog;
@@ -65,7 +69,6 @@ public class EventFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_event, container, false);
-
 
         mrecylerview = (RecyclerView) view.findViewById(R.id.recycler_view);
 

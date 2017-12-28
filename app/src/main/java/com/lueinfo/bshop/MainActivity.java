@@ -47,6 +47,7 @@ import com.lueinfo.bshop.Fragment.IntroFragment;
 import com.lueinfo.bshop.Fragment.LogOut;
 import com.lueinfo.bshop.Fragment.NotificationFragment;
 import com.lueinfo.bshop.Fragment.OfferZone;
+import com.lueinfo.bshop.Fragment.PromotionFragment;
 import com.lueinfo.bshop.Fragment.QrFragment;
 import com.lueinfo.bshop.Fragment.TodaysDeal;
 
@@ -219,13 +220,13 @@ tablayout.addTab(tablayout.newTab());
         frame_head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AllCarts allCarts = new AllCarts();
+              /*  AllCarts allCarts = new AllCarts();
                 if (!allCarts.isInLayout()) {
                     FragmentTransaction transaction = MainActivity.this.getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.container, allCarts);
                     transaction.addToBackStack(null);
                     transaction.commit();
-                }
+                }*/
             }
         });
         //hide header
@@ -490,6 +491,14 @@ tablayout.addTab(tablayout.newTab());
             EventFragment todaysDeal = new EventFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.container, todaysDeal);
+            transaction.addToBackStack(null);
+            transaction.commit() ;
+            headertext.setText("Event");
+        }
+        else if (id ==R.id.specialPromotion){
+            PromotionFragment promotionFragment = new PromotionFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, promotionFragment);
             transaction.addToBackStack(null);
             transaction.commit() ;
             headertext.setText("Event");

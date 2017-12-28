@@ -44,7 +44,10 @@ import java.util.Map;
 public class EventListActivity extends AppCompatActivity {
     CalenderEvensEntity calenderEvensEntity;
     String from="",s1,s2,eventid = "";
-
+    public static final String LANGUAGE = "log";
+    public static final String MyPref = "MyPref";
+    SharedPreferences sharedpreferences;
+    String language;
     private ProgressDialog pDialog;
     private List<PlainClass> plainClassList = new ArrayList<PlainClass>();
 
@@ -64,7 +67,9 @@ public class EventListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_list);
+        sharedpreferences=this.getSharedPreferences(MyPref, Context.MODE_PRIVATE);
 
+        language = sharedpreferences.getString(LANGUAGE,"");
         Intent intent=getIntent();
         calenderEvensEntity=(CalenderEvensEntity) intent.getSerializableExtra(  "eventid" );
 
@@ -152,7 +157,7 @@ public class EventListActivity extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String userid = preferences.getString("id", "");
 
-        final String url = "http://bshop2u.com/apiAdmin/api/event/getEventsByDate/"+eventid;
+        final String url = "http://bshop2u.com/apiAdmin/api/event/getEventsByDate/"+eventid+"/"+language;
 
         final StringRequest movieReq = new StringRequest(url,
                 new Response.Listener<String>() {

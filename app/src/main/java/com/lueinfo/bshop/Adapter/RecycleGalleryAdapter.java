@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.lueinfo.bshop.MyApplication;
 import com.lueinfo.bshop.R;
 
 import java.util.List;
@@ -25,7 +26,8 @@ public class RecycleGalleryAdapter extends RecyclerView.Adapter<RecycleGalleryAd
 
     private  List<PlainClass> movieItems;
     Context context;
-    ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+
+    ImageLoader imageLoader = MyApplication.getInstance().getImageLoader();
 
 
 
