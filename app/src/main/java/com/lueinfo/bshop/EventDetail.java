@@ -64,12 +64,9 @@ public class EventDetail extends AppCompatActivity {
         fab.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* Snackbar.make( view, "Replace with your own action", Snackbar.LENGTH_LONG )
-                        .setAction( "Action", null ).show();*/
                 finish();
             }
         } );
-        //  tital_notification.setText( ""+calenderEvensEntity.getTitle() );
         Intent intent=getIntent();
         eventid = intent.getStringExtra("id");
 
@@ -79,7 +76,6 @@ public class EventDetail extends AppCompatActivity {
     public void populatedata() {
 
         pDialog = new ProgressDialog(EventDetail.this);
-        // Showing progress dialog before making http request
         pDialog.setMessage("Loading...");
         pDialog.show();
 
