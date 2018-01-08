@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<item-->
+        <!--android:id="@+id/navigation_homeqwert"-->
+        <!--android:icon="@drawable/ic_home_black_24dp"-->
+        <!--android:title="" />-->
+    <item
+        android:id="@+id/navigation_setting"
+       android:icon="@drawable/home"
+        android:title="Home" />
+
+    <!--<item-->
+        <!--android:id="@+id/navigation_dashboard"-->
+        <!--android:icon="@drawable/question"-->
+        <!--android:title="" />-->
+
+    <item
+        android:id="@+id/navigation_calender"
+        android:icon="@drawable/newscube"
+        android:title="Feed" />
+
+    <item
+        android:id="@+id/navigation_com"
+        android:icon="@drawable/supermarket"
+        android:title="Mall" />
+
+    <item
+        android:id="@+id/navigation_comment"
+        android:icon="@drawable/ic_notifications_black"
+        android:title="Notification" />
+
+    <item
+        android:id="@+id/navigation_c"
+        android:icon="@drawable/ic_account_box"
+        android:title="Me" />
+
+</menu>

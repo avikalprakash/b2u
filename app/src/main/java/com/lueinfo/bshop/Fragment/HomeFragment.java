@@ -173,7 +173,7 @@ public class HomeFragment extends Fragment {
         HashMap<String, String> user1 = session.getUserDetails();
         mViewPager = (ViewPager) view.findViewById(R.id.imageView);
         listViewproductpromotion=(RecyclerView) view.findViewById(R.id.listViewproducts);
-        listViewnewproducts=(RecyclerView) view.findViewById(R.id.listnewproducts) ;
+        listViewnewproducts=(RecyclerView) view.findViewById(R.id.listnewproducts);
         listViewcategory=(RecyclerView) view.findViewById(R.id.listcategory);
         View he = view.findViewById(R.id.he);
         nonet_ll_home = (LinearLayout) view.findViewById(R.id.nonet_ll_home);

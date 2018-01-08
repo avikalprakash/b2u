@@ -15,5 +15,6 @@
     <color name="black">#000000</color>
     <color name="fragmentbackground">#FFFFFF</color>
     <color name="ncolor">#fff8dc</color>
+    <color name="dcolor">#deb887</color>
 
 </resources>

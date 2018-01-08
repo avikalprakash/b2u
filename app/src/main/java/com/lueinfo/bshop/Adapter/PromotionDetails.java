@@ -11,7 +11,16 @@ public class PromotionDetails {
     String description;
     String image;
     String created_at;
+    String productid;
 
+
+    public String getProductid() {
+        return productid;
+    }
+
+    public void setProductid(String productid) {
+        this.productid = productid;
+    }
 
     public String getTitle() {
         return title;

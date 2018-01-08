@@ -56,8 +56,8 @@ public class PromotionFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_promotion, container, false);
         listPromotion=(ListView)view.findViewById(R.id.ListPromotion);
         sharedpreferences=this.getActivity().getSharedPreferences(MyPref, Context.MODE_PRIVATE);
-
         language = sharedpreferences.getString(LANGUAGE,"");
+
        new PromotionList().execute();
         listPromotion.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -73,6 +73,7 @@ public class PromotionFragment extends Fragment {
                 iP.putExtra("careted_at", careted_at);
                 iP.putExtra("desc", desc);
                 iP.putExtra("image", image);
+                iP.putExtra("productid",promotionDetailses.get(i).getProductid());
                  startActivity(iP);
             }
         });
@@ -111,6 +112,7 @@ public class PromotionFragment extends Fragment {
                             promotionDetails.setDescription(jobject.getString("description"));
                             promotionDetails.setImage(jobject.getString("image"));
                             promotionDetails.setCreated_at(jobject.getString("created_at"));
+                            promotionDetails.setProductid(jobject.getString("post_id"));
                             promotionDetailses.add(promotionDetails);
                             // promotionDetailses.add(new PromotionDetails((JSONObject)jsonArray.get(i)));
                         }

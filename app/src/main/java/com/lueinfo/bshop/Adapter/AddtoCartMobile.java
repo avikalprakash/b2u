@@ -3,6 +3,7 @@ package com.lueinfo.bshop.Adapter;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -13,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
@@ -21,6 +23,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -38,17 +41,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 
 import com.lueinfo.bshop.Database.DatabaseHelper;
+import com.lueinfo.bshop.EventListActivity;
 import com.lueinfo.bshop.Fragment.AllCarts;
 import com.lueinfo.bshop.ImageShow;
 
@@ -76,6 +83,7 @@ import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -91,6 +99,8 @@ public class AddtoCartMobile extends Fragment {
 private String URL_SOAP_LOGIN = "http://bshop2u.com/apirest/soap_login";
     private String Content;
     ProgressBar pb;
+    private ProgressDialog pDialog;
+    String sessionid,cartid;
     Button button1,button2;
     String giiglemap_adress;
     String imageurl;
@@ -301,22 +311,13 @@ private String URL_SOAP_LOGIN = "http://bshop2u.com/apirest/soap_login";
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if(button1.getText().equals(getString(R.string.AddtoCart))) {
-//
-//                    new AddToCart().execute(session_id, cart_id, Product_id, String.valueOf(qty));
-//                }else {
-//                    AllCarts allCarts = new AllCarts();
-//                    if (!allCarts.isInLayout()) {
-//                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                        transaction.replace(R.id.container, allCarts);
-//                        transaction.addToBackStack(null);
-//                        transaction.commit();
-//                    }
-//                }
-Toast.makeText(getActivity(),"CART FACILITY NOT AVAILABLE NOW .COMMING SOON", Toast.LENGTH_LONG).show();
+
+                Addcart();
 
             }
         });
+
+        populatedata();
     }
 
     private class GetShopLogin extends AsyncTask<Void, Void, Void> {
@@ -937,6 +938,7 @@ Log.d("HELLODATA",s);
     }
     @Override
     public void onDestroy() {
+        hidePDialog();
         super.onDestroy();
         dialog.dismiss();
         if ( myAsync.getStatus()== AsyncTask.Status.RUNNING)
@@ -944,4 +946,277 @@ Log.d("HELLODATA",s);
             myAsync.cancel(true);
         }
     }
+
+    public void populatedata() {
+
+        pDialog = new ProgressDialog(getContext());
+        // Showing progress dialog before making http request
+        pDialog.setMessage("Loading...");
+        pDialog.show();
+
+
+        final String url = "http://bshop2u.com/apirest/soap_login";
+
+        final StringRequest movieReq = new StringRequest(url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("rr000", response.toString());
+                        hidePDialog();
+                        try {
+                            JSONObject objone = new JSONObject(response);
+                            boolean error = objone.getBoolean("error");
+
+                            if(error){
+
+                            }else{
+
+                                JSONObject jsonObject = objone.getJSONObject("message");
+                                 sessionid = jsonObject.getString("session_id");
+                                 cartid = jsonObject.getString("cart_id");
+
+//                                JSONArray jsonArray = objone.getJSONArray("message");
+//                                for (int i = 0; i < jsonArray.length(); i++) {
+//
+//                                    JSONObject obj = jsonArray.getJSONObject(i);
+//                                    PlainClass plainClass = new PlainClass();
+//                                    plainClass.setId(obj.getString("event_id"));
+//                                    plainClass.setTitle(obj.getString("title"));
+//                                    // movie.setTimetxt(obj.getString("created_at"));
+//                                    plainClass.setThumbnailUrl(obj.getString("image"));
+//                                    plainClass.setTimestamp(obj.getString("created_at"));
+//                                    plainClassList.add(plainClass);
+//
+//                                }
+                            }
+
+                            //  adapter.notifyDataSetChanged();
+
+                        }catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+
+                    // notifying list adapter about data changes
+                    // so that it renders the list view with updated data
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(getContext(), "You Have Some Connectivity Issue....", Toast.LENGTH_LONG).show();
+                }
+                hidePDialog();
+
+            }
+        });
+        {
+            RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+            requestQueue.add(movieReq);
+        }
+
+    }
+
+    private void hidePDialog() {
+        if (pDialog != null) {
+            pDialog.dismiss();
+            pDialog = null;
+        }
+    }
+
+    public void Addcart(){
+
+        pDialog = new ProgressDialog(getContext());
+        // Showing progress dialog before making http request
+        pDialog.setMessage("Loading...");
+        pDialog.show();
+
+        Map<String, String> postParam= new HashMap<String, String>();
+        postParam.put("session_id", sessionid);
+        postParam.put("cart_id", cartid);
+        postParam.put("product_id", Entity_Id);
+        postParam.put("qty", "1");
+
+
+
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                "http://bshop2u.com/apirest/add_to_cart", new JSONObject(postParam),
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject objone) {
+                        pDialog.dismiss();
+                        Log.d("tag", objone.toString());
+                                   try {
+               // JSONObject objone = new JSONObject(response);
+                boolean check  = objone.getBoolean("error");
+                if(check) {
+
+                    String messg = objone.getString("message");
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setMessage(messg)
+                            .setNegativeButton("ok", null)
+                            .create()
+                            .show();
+                }else{
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setMessage("Add to cart successfully!")
+                            .setNegativeButton("ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                   button1.setEnabled(false);
+                                    button1.setBackgroundColor(getResources().getColor(R.color.dcolor));
+
+                                }
+                            })
+                            .create()
+                            .show();
+
+
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                pDialog.dismiss();
+                VolleyLog.d("tag", "Error: " + error.getMessage());
+                //  hideProgressDialog();
+            }
+        }) {
+
+            /**
+             * Passing some request headers
+             * */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                return headers;
+            }
+
+
+
+        };
+
+        jsonObjReq.setTag("tag");
+        // Adding request to request queue
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        queue.add(jsonObjReq);
+
+    }
+
+//    class AddtoCart extends AsyncTask<String, Void, String> {
+//
+//        private ProgressDialog pDialog;
+//
+////        String username = musernametxt.getText().toString().trim();
+////        String password = mpasswordtxt.getText().toString().trim();
+////        String token = TokenSave.getInstance(LoginActivity.this).getDeviceToken();
+//
+//
+//
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//            pDialog = new ProgressDialog(getContext());
+//            pDialog.setMessage("Please Wait ...");
+//            pDialog.setIndeterminate(false);
+//            pDialog.setCancelable(true);
+//            pDialog.show();
+//
+//        }
+//
+//        @Override
+//        protected String doInBackground(String... args) {
+//            String s = "";
+//
+//
+//            try {
+//                HttpClient httpClient = new DefaultHttpClient();
+//                HttpPost httpPost = new HttpPost("http://bshop2u.com/apirest/add_to_cart");
+//                httpPost.setHeader("Content-type", "application/json");
+//                JSONObject jsonObject = new JSONObject();
+//                jsonObject.accumulate("session_id", sessionid);
+//                jsonObject.accumulate("cart_id", cartid);
+//                jsonObject.accumulate("product_id", Entity_Id);
+//                jsonObject.accumulate("qty", "1");
+//
+//                StringEntity stringEntity = new StringEntity(jsonObject.toString());
+//                httpPost.setEntity(stringEntity);
+//                HttpResponse httpResponse = httpClient.execute(httpPost);
+//                HttpEntity httpEntity = httpResponse.getEntity();
+//                s = readadsResponse(httpResponse);
+//                Log.d("tag1", " " + s);
+//            } catch (Exception exception) {
+//                exception.printStackTrace();
+//
+//                Log.d("espone",exception.toString());
+//
+//            }
+//
+//            return s;
+//
+//        }
+//        @Override
+//        protected void onPostExecute(String json) {
+//            super.onPostExecute(json);
+//            pDialog.dismiss();
+//            try {
+//                JSONObject objone = new JSONObject(json);
+//                boolean check  = objone.getBoolean("error");
+//                if(check) {
+//
+//                    String messg = objone.getString("message");
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//                    builder.setMessage(messg)
+//                            .setNegativeButton("ok", null)
+//                            .create()
+//                            .show();
+//                }else{
+//
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//                    builder.setMessage("Add to cart successfully!")
+//                            .setNegativeButton("ok", null)
+//                            .create()
+//                            .show();
+//
+//
+//                }
+//
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+//
+//
+//    private String readadsResponse(HttpResponse httpResponse) {
+//
+//        InputStream is = null;
+//        String return_text = "";
+//        try {
+//            is = httpResponse.getEntity().getContent();
+//            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+//            String line = "";
+//            StringBuffer sb = new StringBuffer();
+//            while ((line = bufferedReader.readLine()) != null) {
+//                sb.append(line);
+//            }
+//            return_text = sb.toString();
+//            Log.d("return1230", "" + return_text);
+//        } catch (Exception e) {
+//
+//        }
+//        return return_text;
+//    }
+
 }

@@ -91,6 +91,7 @@ public class OfferZone extends Fragment {
                 intent.putExtra("price", movie.getPrice());
                 intent.putExtra("description",movie.getDescription());
                 intent.putExtra("image",movie.getImage());
+                intent.putExtra("offerid",movie.getId());
                 startActivity(intent);
                 //  Toast.makeText(SpecialPromotion.this, "You Clicked at "+movie.getItemid(), Toast.LENGTH_SHORT).show();
 

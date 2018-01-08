@@ -70,6 +70,7 @@ public class EventListActivity extends AppCompatActivity {
         sharedpreferences=this.getSharedPreferences(MyPref, Context.MODE_PRIVATE);
 
         language = sharedpreferences.getString(LANGUAGE,"");
+
         Intent intent=getIntent();
         calenderEvensEntity=(CalenderEvensEntity) intent.getSerializableExtra(  "eventid" );
 

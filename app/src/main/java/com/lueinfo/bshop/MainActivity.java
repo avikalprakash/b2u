@@ -1,12 +1,15 @@
 package com.lueinfo.bshop;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
@@ -28,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.lueinfo.bshop.Adapter.BottomNavigationViewHelper;
 import com.lueinfo.bshop.Adapter.ItemEntity;
 import com.lueinfo.bshop.Adapter.LanguageDatabase;
 import com.lueinfo.bshop.Adapter.Message;
@@ -84,6 +88,12 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar1 = (Toolbar) findViewById(R.id.toolbarheader);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(null);
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationViewHelper.disableShiftMode(navigation);
+
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
         //  viewpager1=(ViewPager)findViewById(R.id.viewpagertab);
         //  setUpViewPager(viewpager1);
 
@@ -229,6 +239,58 @@ tablayout.addTab(tablayout.newTab());
         checkRunTimePermission();
 
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+//                case R.id.navigation_homeqwert:
+//
+//                    addHomeFragment();
+//
+//                    return true;
+                case R.id.navigation_setting:
+
+                    home = new HomeFragment();
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.container, home);
+                    transaction.commit();
+
+                    return true;
+
+                case R.id.navigation_com:
+
+                    CotegoriesFragment cotegoryFragment = new CotegoriesFragment();
+                    FragmentTransaction transaction123 = getSupportFragmentManager().beginTransaction();
+                    transaction123.replace(R.id.container, cotegoryFragment);
+                    transaction123.addToBackStack(null);
+                    transaction123.commit();
+                    headertext.setText("CATEGORY");
+
+
+                    return true;
+                case R.id.navigation_calender:
+
+                    PromotionFragment promotionFragment = new PromotionFragment();
+                    FragmentTransaction transactionpromo = getSupportFragmentManager().beginTransaction();
+                    transactionpromo.replace(R.id.container, promotionFragment);
+                    transactionpromo.addToBackStack(null);
+                    transactionpromo.commit() ;
+                    headertext.setText("Event");
+
+                    return true;
+
+
+
+            }
+            return false;
+        }
+
+    };
+
+
 
     /*    protected void setUpViewPager(ViewPager viewpager){
             Pager viewpageradapter=new Pager(getSupportFragmentManager());
@@ -605,6 +667,7 @@ tablayout.addTab(tablayout.newTab());
                         showRestartConfirmDlg(log);
                     }
                 }
+
             });
             adb.show();
         }
