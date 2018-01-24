@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#f43142"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#f43142">
+        <ImageView
+            android:id="@+id/back_image"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:id="@+id/excellogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="20dp"
+            android:textSize="20dp"
+            android:text="QR Code Scanner"
+            android:textColor="@android:color/white"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="@android:color/white"
+            android:layout_below="@+id/excellogo"
+            android:layout_marginTop="15dp"
+            />
+
+
+    </RelativeLayout>
+    <com.dlazaro66.qrcodereaderview.QRCodeReaderView
+        android:id="@+id/qrdecoderview"
+        android:layout_width="match_parent"
+        android:layout_height="400dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/resulttextview"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        android:text="Qr Code Scanner"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"/>
+
+
+</LinearLayout>

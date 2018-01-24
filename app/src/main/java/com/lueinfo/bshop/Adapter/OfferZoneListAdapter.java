@@ -20,7 +20,7 @@ import java.util.List;
  * Created by Fujitsu on 22/05/2017.
  */
 
-public class CustomListAdapter extends BaseAdapter {
+public class OfferZoneListAdapter extends BaseAdapter {
 private Context activity;
 private LayoutInflater inflater;
 private List<PromotionModel> movieItems;
@@ -28,7 +28,7 @@ private List<PromotionModel> movieItems;
 
 
 
-public CustomListAdapter(Context context, List<PromotionModel> movie) {
+public OfferZoneListAdapter(Context context, List<PromotionModel> movie) {
 
         this.activity = context;
         this.movieItems = movie;

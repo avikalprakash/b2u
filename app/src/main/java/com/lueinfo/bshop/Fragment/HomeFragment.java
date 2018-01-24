@@ -25,9 +25,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -35,19 +36,20 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lueinfo.bshop.Adapter.Adapter;
 import com.lueinfo.bshop.Adapter.AddtoCartMobile;
 import com.lueinfo.bshop.Adapter.AndroidImageAdapternew;
-import com.lueinfo.bshop.Adapter.CategoryAdapter;
+import com.lueinfo.bshop.Adapter.NewArrivalAdapter;
 import com.lueinfo.bshop.Adapter.Details;
 import com.lueinfo.bshop.Adapter.ItemEntity;
 import com.lueinfo.bshop.Adapter.NewProductAdapter;
+import com.lueinfo.bshop.Adapter.PojoClass;
 import com.lueinfo.bshop.Adapter.ProductPromotionAdapter;
 import com.lueinfo.bshop.Adapter.RecyclerItemClickListener;
-import com.lueinfo.bshop.Adapter.ServiceHandler;
 import com.lueinfo.bshop.Adapter.SessionManagement;
-import com.lueinfo.bshop.Adapter.Utils;
 import com.lueinfo.bshop.Database.DatabaseHelper;
 import com.lueinfo.bshop.MainActivity;
+import com.lueinfo.bshop.OfferZoneDetails;
 import com.lueinfo.bshop.R;
 import com.roger.catloadinglibrary.CatLoadingView;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -75,7 +77,7 @@ public class HomeFragment extends Fragment {
 
     private static final int SHOW_PROCESS_DIALOG = 1;
     private static final int HIDE_PROCESS_DIALOG = 0;
-
+    float density;
     ProgressBar pb;
     ViewPager mViewPager;
     AVLoadingIndicatorView indicatorView;
@@ -84,17 +86,18 @@ public class HomeFragment extends Fragment {
     LinearLayout nonet_ll_cot;
     Button retry;
     static FrameLayout frame_head;
-    ImageView searchheader;
+    ImageView searchheader,mbackimage;
     DatabaseHelper dbHelper;
     private static int currentPage = 0;
     Message m;
     //    ListView listView;
-    RecyclerView listViewproductpromotion,listViewnewproducts;
-    RecyclerView listViewcategory;
+    RecyclerView listViewHotDeals,listViewbestSelling;
+    RecyclerView listNewArrival;
+    RecyclerView listViewCategory;
 
     TextView displayUserName,YourAcount,headertext;
     AndroidImageAdapternew adapterView;
-    ArrayList<ItemEntity> cotegory_list = new ArrayList<ItemEntity>();
+    ArrayList<ItemEntity> newArrival_list = new ArrayList<ItemEntity>();
     ArrayList<ItemEntity> Productpromotion = new ArrayList<ItemEntity>();
     ArrayList<ItemEntity> SliderImage = new ArrayList<ItemEntity>();
     ArrayList<ItemEntity> newProducts=new ArrayList<ItemEntity>();
@@ -119,6 +122,28 @@ public class HomeFragment extends Fragment {
     CirclePageIndicator indicator;
     private NfcAdapter mAdapter;
     private PendingIntent mPendingIntent;
+
+    LinearLayout  mwfashiontxt,mmenfashion,mhealthyandbeautytxt,mmobileittxt,mhomelectxt,mhomsportstxt,msportstxt,
+            mbabytxt,mgrocerytxt,mvouchertxt,mexcitingoffertxt;
+
+
+
+    GridView mgridview;
+
+    private Adapter mNameAdapter;
+
+    private ArrayList<PojoClass> dummydata;
+    int[] flags = new int[]{
+            R.drawable.agarwoodbracelet,
+            R.drawable.agarwoodcollectible,
+            R.drawable.agarwoodessenseoil,
+            R.drawable.agarwoodhealthy,
+            R.drawable.agarwoodincense,
+            R.drawable.agarwoodnecklace,
+            R.drawable.agarwoodtea,
+            R.drawable.agarwoodwooden,
+    };
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -172,9 +197,11 @@ public class HomeFragment extends Fragment {
         session = new SessionManagement(getActivity());
         HashMap<String, String> user1 = session.getUserDetails();
         mViewPager = (ViewPager) view.findViewById(R.id.imageView);
-        listViewproductpromotion=(RecyclerView) view.findViewById(R.id.listViewproducts);
-        listViewnewproducts=(RecyclerView) view.findViewById(R.id.listnewproducts);
-        listViewcategory=(RecyclerView) view.findViewById(R.id.listcategory);
+        listViewHotDeals=(RecyclerView) view.findViewById(R.id.listViewHotDeals);
+        listViewbestSelling=(RecyclerView) view.findViewById(R.id.listbestSelling);
+        listNewArrival=(RecyclerView) view.findViewById(R.id.listNewArrival);
+       // listViewCategory=(RecyclerView) view.findViewById(R.id.listViewCategory);
+
         View he = view.findViewById(R.id.he);
         nonet_ll_home = (LinearLayout) view.findViewById(R.id.nonet_ll_home);
         pb = (ProgressBar) view.findViewById(R.id.pb_home);
@@ -205,9 +232,270 @@ public class HomeFragment extends Fragment {
            }
        });
        new SlidingImage().execute();
-       new ShopByDep().execute();
+       new NewArrival().execute();
         new ProductPromotion().execute();
-        new NewProduct().execute();
+        new BestSelling().execute();
+
+//        mwfashiontxt = (LinearLayout) view.findViewById(R.id.wfashion);
+//        mmenfashion = (LinearLayout) view.findViewById(R.id.mfashion);
+//        mhealthyandbeautytxt = (LinearLayout) view.findViewById(R.id.healthytxt);
+//        mmobileittxt = (LinearLayout) view.findViewById(R.id.mobileittxt);
+//        mhomelectxt = (LinearLayout) view.findViewById(R.id.homeclectxt);
+//        mhomsportstxt = (LinearLayout) view.findViewById(R.id.homelivingtxt);
+//        msportstxt = (LinearLayout) view.findViewById(R.id.sportstxt);
+//        mbabytxt = (LinearLayout) view.findViewById(R.id.babytxt);
+//        mgrocerytxt = (LinearLayout) view.findViewById(R.id.grocerytxt);
+//        mexcitingoffertxt = (LinearLayout) view.findViewById(R.id.excitoffertxt);
+//        mvouchertxt = (LinearLayout) view.findViewById(R.id.evouchertxt);
+//
+//
+//       mwfashiontxt.setOnClickListener(new View.OnClickListener() {
+//           @Override
+//           public void onClick(View v) {
+//               SubCategory subCategory=new SubCategory();
+//               FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//               Bundle bundle = new Bundle();
+//               bundle.putString("Id", "7");
+//               bundle.putString("NAME","Women Fashion");
+//               subCategory.setArguments(bundle);
+//               fragmentTransaction.addToBackStack(null);
+//               fragmentTransaction.replace(R.id.container,subCategory);
+//               fragmentTransaction.commit();
+//           }
+//       });
+//
+//        mmenfashion.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SubCategory subCategory=new SubCategory();
+//                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("Id", "8");
+//                bundle.putString("NAME","Men Fashion");
+//                subCategory.setArguments(bundle);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.replace(R.id.container,subCategory);
+//                fragmentTransaction.commit();
+//            }
+//        });
+//
+//        mhealthyandbeautytxt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SubCategory subCategory=new SubCategory();
+//                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("Id", "132");
+//                bundle.putString("NAME","Health & Beauty");
+//                subCategory.setArguments(bundle);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.replace(R.id.container,subCategory);
+//                fragmentTransaction.commit();
+//            }
+//        });
+//
+//        mmobileittxt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SubCategory subCategory=new SubCategory();
+//                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("Id", "5");
+//                bundle.putString("NAME","Mobile, IT & Camera");
+//                subCategory.setArguments(bundle);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.replace(R.id.container,subCategory);
+//                fragmentTransaction.commit();
+//            }
+//        });
+//
+//        mhomelectxt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SubCategory subCategory=new SubCategory();
+//                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("Id", "6");
+//                bundle.putString("NAME","Home Electronics");
+//                subCategory.setArguments(bundle);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.replace(R.id.container,subCategory);
+//                fragmentTransaction.commit();
+//            }
+//        });
+//
+//        msportstxt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SubCategory subCategory=new SubCategory();
+//                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("Id", "99");
+//                bundle.putString("NAME","Sports & Automotive");
+//                subCategory.setArguments(bundle);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.replace(R.id.container,subCategory);
+//                fragmentTransaction.commit();
+//            }
+//        });
+//
+//        mbabytxt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SubCategory subCategory=new SubCategory();
+//                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("Id", "120");
+//                bundle.putString("NAME","Baby, Kids & Toys");
+//                subCategory.setArguments(bundle);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.replace(R.id.container,subCategory);
+//                fragmentTransaction.commit();
+//            }
+//        });
+//
+//        mgrocerytxt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SubCategory subCategory=new SubCategory();
+//                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("Id", "128");
+//                bundle.putString("NAME","Grocery");
+//                subCategory.setArguments(bundle);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.replace(R.id.container,subCategory);
+//                fragmentTransaction.commit();
+//            }
+//        });
+//
+//        mvouchertxt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SubCategory subCategory=new SubCategory();
+//                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("Id", "136");
+//                bundle.putString("NAME","E-voucher & More");
+//                subCategory.setArguments(bundle);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.replace(R.id.container,subCategory);
+//                fragmentTransaction.commit();
+//            }
+//        });
+//        mvouchertxt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SubCategory subCategory=new SubCategory();
+//                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("Id", "136");
+//                bundle.putString("NAME","E-voucher & More");
+//                subCategory.setArguments(bundle);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.replace(R.id.container,subCategory);
+//                fragmentTransaction.commit();
+//            }
+//        });
+//
+//        mexcitingoffertxt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SubCategory subCategory=new SubCategory();
+//                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("Id", "191");
+//                bundle.putString("NAME","Exciting Offers");
+//                subCategory.setArguments(bundle);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.replace(R.id.container,subCategory);
+//                fragmentTransaction.commit();
+//            }
+//        });
+//
+//        mhomsportstxt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SubCategory subCategory=new SubCategory();
+//                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("Id", "4");
+//                bundle.putString("NAME","Home & Living");
+//                subCategory.setArguments(bundle);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.replace(R.id.container,subCategory);
+//                fragmentTransaction.commit();
+//            }
+//        });
+
+
+        mgridview = (GridView) view.findViewById(R.id.gv);
+
+        dummydata = new ArrayList<>();
+
+        PojoClass c1 = new PojoClass(flags[0],"Agarwood bracelet");
+        PojoClass c2 = new PojoClass(flags[1],"Agarwood collectible");
+        PojoClass c3 = new PojoClass(flags[2],"Agarwood essenseoil");
+        PojoClass c4 = new PojoClass(flags[3],"Agarwood healthy");
+        PojoClass c5 = new PojoClass(flags[4],"Agarwood incense");
+        PojoClass c6 = new PojoClass(flags[5],"Agarwood necklace");
+        PojoClass c7 = new PojoClass(flags[6],"Agarwood tea");
+        PojoClass c8 =  new PojoClass(flags[7],"Agarwood wooden");
+
+        dummydata.add(c1);
+        dummydata.add(c2);
+        dummydata.add(c3);
+        dummydata.add(c4);
+        dummydata.add(c5);
+        dummydata.add(c6);
+        dummydata.add(c7);
+        dummydata.add(c8);
+
+
+        mNameAdapter = new Adapter(getContext(), dummydata);
+
+        mgridview.setAdapter(mNameAdapter);
+
+        mgridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if (position == 0) {
+
+                    SubCategory subCategory=new SubCategory();
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+               Bundle bundle = new Bundle();
+               bundle.putString("Id", "7");
+               bundle.putString("NAME","Women Fashion");
+               subCategory.setArguments(bundle);
+               fragmentTransaction.addToBackStack(null);
+               fragmentTransaction.replace(R.id.container,subCategory);
+               fragmentTransaction.commit();
+
+                }
+
+                if (position == 1) {
+
+                    SubCategory subCategory=new SubCategory();
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                Bundle bundle = new Bundle();
+                bundle.putString("Id", "8");
+                bundle.putString("NAME","Men Fashion");
+                subCategory.setArguments(bundle);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.replace(R.id.container,subCategory);
+                fragmentTransaction.commit();
+
+                }
+
+
+
+            }
+        });
+
+
+
+
         return  view;
     }
 
@@ -298,8 +586,10 @@ public class HomeFragment extends Fragment {
                 adapterView = new AndroidImageAdapternew(getActivity(), ImageList);
                 mViewPager.setAdapter(adapterView);
                 indicator.setViewPager(mViewPager);
-                final float density = getResources().getDisplayMetrics().density;
+                try {
+                   density = getResources().getDisplayMetrics().density;
                 indicator.setRadius(5 * density);
+                }catch (Exception e){}
                 runnable = new Runnable() {
                     public void run() {
                         if (adapterView.getCount() == page) {
@@ -337,7 +627,7 @@ public class HomeFragment extends Fragment {
     }
 
 
-    class ShopByDep extends AsyncTask<String, Void, String> {
+    class NewArrival extends AsyncTask<String, Void, String> {
 
         private ProgressDialog pDialog;
 
@@ -360,7 +650,7 @@ public class HomeFragment extends Fragment {
 
             try {
                 HttpClient httpClient = new DefaultHttpClient();
-                HttpPost httpPost = new HttpPost("http://bshop2u.com/apirest/shop_by_department");
+                HttpPost httpPost = new HttpPost("http://bshop2u.com/apirest/new_products");
                 httpPost.setHeader("Content-type", "application/json");
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.accumulate("lang", language);
@@ -388,7 +678,7 @@ public class HomeFragment extends Fragment {
             String messagedeptment="";
             try {
                 JSONObject jsonObject=new JSONObject(json);
-                String department=jsonObject.getString("shop_by_department");
+                String department=jsonObject.getString("new_products");
                 JSONObject homedepartment=new JSONObject(department);
                 messagedeptment=homedepartment.getString("message");
                 Log.d("HELLO<><><><>dept",messagedeptment);
@@ -405,32 +695,51 @@ public class HomeFragment extends Fragment {
                     Log.d("object", "kk1111xxxxx " + jsonArray.getJSONObject(i).toString());
                     JSONObject jobject = jsonArray.getJSONObject(i);
                     ItemEntity itemEntity = new ItemEntity();
-                    itemEntity.setCategory_id(jobject.getString("entity_id"));
+                    itemEntity.setCategory_id(jobject.getString("id"));
                     itemEntity.setName(jobject.getString("name"));
-                    itemEntity.setImage(jobject.getString("image_url"));
-                    cotegory_list.add(itemEntity);
+                    itemEntity.setDescription(jobject.getString("description"));
+                    itemEntity.setImage(jobject.getString("image"));
+                    itemEntity.setPrice(jobject.getString("price"));
+                   // itemEntity.setProduct_Url(jobject.getString("url"));
+                    newArrival_list.add(itemEntity);
                 }
             }catch (Exception e){
                 e.printStackTrace();
             }
-            CategoryAdapter adapter3=new CategoryAdapter(getActivity(),cotegory_list);
-            listViewcategory.setAdapter(adapter3);
-            listViewcategory.setLayoutManager(manager3);
-            listViewcategory.addOnItemTouchListener(
-                    new RecyclerItemClickListener(context, listViewproductpromotion ,new RecyclerItemClickListener.OnItemClickListener() {
+            NewArrivalAdapter adapter3=new NewArrivalAdapter(getActivity(),newArrival_list);
+            listNewArrival.setAdapter(adapter3);
+            listNewArrival.setLayoutManager(manager3);
+            listNewArrival.addOnItemTouchListener(
+                    new RecyclerItemClickListener(context, listNewArrival ,new RecyclerItemClickListener.OnItemClickListener() {
                         @Override
                         public void onItemClick(View view, int position) {
-                            String id = cotegory_list.get(position).getCategory_id();
+                            String id = newArrival_list.get(position).getCategory_id();
+                            String nme = newArrival_list.get(position).getName();
+                            String price = newArrival_list.get(position).getPrice();
+                            String desc = newArrival_list.get(position).getDescription();
+                            String img = newArrival_list.get(position).getImage();
+                            String url = newArrival_list.get(position).getProduct_Url();
                             Log.d("check4"," "+id);
 
-                            SubCategory subCategory=new SubCategory();
-                            FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
-                            Bundle bundle = new Bundle();
-                            bundle.putString("Id", id);
-                            subCategory.setArguments(bundle);
-                            fragmentTransaction.addToBackStack(null);
-                            fragmentTransaction.replace(R.id.container,subCategory);
-                            fragmentTransaction.commit();
+                            Intent intent = new Intent(getActivity(),OfferZoneDetails.class);
+                            intent.putExtra("name",nme);
+                            intent.putExtra("price", price);
+                            intent.putExtra("description",desc);
+                            intent.putExtra("image",img);
+                            intent.putExtra("offerid",id);
+                           // intent.putExtra("url",url);
+                            startActivity(intent);
+                            getActivity().finish();
+
+//                            AddtoCartMobile addtoCartMobile = new AddtoCartMobile();
+//                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//                            Bundle bundle = new Bundle();
+//                            bundle.putString("KeyValue",id);
+//                            //  bundle.putString("Url","http://54.67.107.248/jeptags/api/rest/products?filter[1][attribute]=mode&filter[1][in]=238");
+//                            addtoCartMobile.setArguments(bundle);
+//                            transaction.replace(R.id.container, addtoCartMobile);
+//                            transaction.addToBackStack(null);
+//                            transaction.commit();
                         }
 
                         @Override
@@ -463,7 +772,8 @@ public class HomeFragment extends Fragment {
 
             try {
                 HttpClient httpClient = new DefaultHttpClient();
-                HttpPost httpPost = new HttpPost("http://bshop2u.com/apirest/home_product_promotions");
+              //  HttpPost httpPost = new HttpPost("http://bshop2u.com/apirest/home_product_promotions");
+                HttpPost httpPost = new HttpPost("http://bshop2u.com/apirest/hot_deals_custom");
                 httpPost.setHeader("Content-type", "application/json");
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.accumulate("lang", language);
@@ -524,27 +834,46 @@ public class HomeFragment extends Fragment {
             }
 
             ProductPromotionAdapter adapter1=new ProductPromotionAdapter(getActivity(),Productpromotion);
-            listViewproductpromotion.setAdapter(adapter1);
-            listViewproductpromotion.setLayoutManager(manager1);
+            listViewHotDeals.setAdapter(adapter1);
+            listViewHotDeals.setLayoutManager(manager1);
 
-            listViewproductpromotion.addOnItemTouchListener(
-                    new RecyclerItemClickListener(context, listViewproductpromotion ,new RecyclerItemClickListener.OnItemClickListener() {
+            listViewHotDeals.addOnItemTouchListener(
+                    new RecyclerItemClickListener(context, listViewHotDeals ,new RecyclerItemClickListener.OnItemClickListener() {
                         @Override
                         public void onItemClick(View view, int position) {
                             // do whatever
                             String entityId=Productpromotion.get(position).getProductPromotionId();
-                            Log.d("HELLO<><>", String.valueOf(position));
-                            Log.d("HELLO<><><>",entityId);
-                            String image=cotegory_list.get(position).getProductPromotionImage();
-                            AddtoCartMobile addtoCartMobile = new AddtoCartMobile();
-                            android.support.v4.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                            Bundle bundle = new Bundle();
-                            bundle.putString("KeyValue",entityId);
-                            //  bundle.putString("Url","http://54.67.107.248/jeptags/api/rest/products?filter[1][attribute]=mode&filter[1][in]=238");
-                            addtoCartMobile.setArguments(bundle);
-                            transaction.replace(R.id.container, addtoCartMobile);
-                            transaction.addToBackStack(null);
-                            transaction.commit();
+
+                            String nme = Productpromotion.get(position).getProductPromotionName();
+                            String price = Productpromotion.get(position).getMrpPrice();
+                            String desc = Productpromotion.get(position).getDescription();
+                            String img = Productpromotion.get(position).getProductPromotionImage();
+                            Log.d("check4"," "+entityId);
+
+                            Intent intent = new Intent(getActivity(),OfferZoneDetails.class);
+                            intent.putExtra("name",nme);
+                            intent.putExtra("price", price);
+                            intent.putExtra("description",desc);
+                            intent.putExtra("image",img);
+                            intent.putExtra("offerid",entityId);
+                            // intent.putExtra("url",url);
+                            startActivity(intent);
+                            getActivity().finish();
+
+
+
+//                            Log.d("HELLO<><>", String.valueOf(position));
+//                            Log.d("HELLO<><><>",entityId);
+//                            String image=Productpromotion.get(position).getProductPromotionImage();
+//                            AddtoCartMobile addtoCartMobile = new AddtoCartMobile();
+//                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//                            Bundle bundle = new Bundle();
+//                            bundle.putString("KeyValue",entityId);
+//                            //  bundle.putString("Url","http://54.67.107.248/jeptags/api/rest/products?filter[1][attribute]=mode&filter[1][in]=238");
+//                            addtoCartMobile.setArguments(bundle);
+//                            transaction.replace(R.id.container, addtoCartMobile);
+//                            transaction.addToBackStack(null);
+//                            transaction.commit();
                         }
 
                         @Override
@@ -557,7 +886,7 @@ public class HomeFragment extends Fragment {
     }
 
 
-    class NewProduct extends AsyncTask<String, Void, String> {
+    class BestSelling extends AsyncTask<String, Void, String> {
 
         private ProgressDialog pDialog;
 
@@ -581,7 +910,8 @@ public class HomeFragment extends Fragment {
 
             try {
                 HttpClient httpClient = new DefaultHttpClient();
-                HttpPost httpPost = new HttpPost("http://bshop2u.com/apirest/new_products");
+            //    HttpPost httpPost = new HttpPost("http://bshop2u.com/apirest/new_products");
+                HttpPost httpPost = new HttpPost("http://bshop2u.com/apirest/best_selling_products_custom");
                 httpPost.setHeader("Content-type", "application/json");
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.accumulate("lang", language);
@@ -609,9 +939,9 @@ public class HomeFragment extends Fragment {
             String messagenewproduct="";
             try {
                 JSONObject jsonObject=new JSONObject(json);
-                String newproduct=jsonObject.getString("new_products");
-                JSONObject newproducts=new JSONObject(newproduct);
-                messagenewproduct=newproducts.getString("message");
+               /* String newproduct=jsonObject.getString("new_products");
+                JSONObject newproducts=new JSONObject(newproduct);*/
+                messagenewproduct=jsonObject.getString("message");
                 Log.d("HELLO<><><><>newprdt",messagenewproduct);
 
             } catch (JSONException e) {
@@ -625,11 +955,13 @@ public class HomeFragment extends Fragment {
                 for (int k=0;k<newzproductArry.length();k++){
                     JSONObject jobject = newzproductArry.getJSONObject(k);
                     ItemEntity itemEntity1 = new ItemEntity();
-                    itemEntity1.setProductPromotionId(jobject.getString("entity_id"));
+                    itemEntity1.setProductPromotionId(jobject.getString("id"));
+                   // itemEntity1.setProductPromotionId(jobject.getString("entity_id"));
                     itemEntity1.setProductPromotionName(jobject.getString("name"));
+                    itemEntity1.setDescription(jobject.getString("description"));
                     itemEntity1.setProductPromotionImage(jobject.getString("image"));
                     itemEntity1.setMrpPrice(jobject.getString("price"));
-                    itemEntity1.setSalePrice(jobject.getString("special_price"));
+                   // itemEntity1.setSalePrice(jobject.getString("special_price"));
 
                     newProducts.add(itemEntity1);
                     Log.d("HELLO<>newprdtaray",newProducts.toString());
@@ -643,25 +975,45 @@ public class HomeFragment extends Fragment {
                 e.printStackTrace();
             }
             NewProductAdapter adapter2=new NewProductAdapter(getActivity(),newProducts);
-            listViewnewproducts.setAdapter(adapter2);
-            listViewnewproducts.setLayoutManager(manager2);
+            listViewbestSelling.setAdapter(adapter2);
+            listViewbestSelling.setLayoutManager(manager2);
 
-            listViewnewproducts.addOnItemTouchListener(
-                    new RecyclerItemClickListener(context, listViewproductpromotion ,new RecyclerItemClickListener.OnItemClickListener() {
+            listViewbestSelling.addOnItemTouchListener(
+                    new RecyclerItemClickListener(context, listViewHotDeals ,new RecyclerItemClickListener.OnItemClickListener() {
                         @Override
                         public void onItemClick(View view, int position) {
                             // do whatever
                             String entityId=newProducts.get(position).getProductPromotionId();
-                            String image=cotegory_list.get(position).getProductPromotionImage();
-                            AddtoCartMobile addtoCartMobile = new AddtoCartMobile();
-                            android.support.v4.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                            Bundle bundle = new Bundle();
-                            bundle.putString("KeyValue",entityId);
-                            //  bundle.putString("Url","http://54.67.107.248/jeptags/api/rest/products?filter[1][attribute]=mode&filter[1][in]=238");
-                            addtoCartMobile.setArguments(bundle);
-                            transaction.replace(R.id.container, addtoCartMobile);
-                            transaction.addToBackStack(null);
-                            transaction.commit();
+
+                            String nme = newProducts.get(position).getProductPromotionName();
+                            String price = newProducts.get(position).getMrpPrice();
+                            String desc = newProducts.get(position).getDescription();
+                            String img = newProducts.get(position).getProductPromotionImage();
+                            String url = newProducts.get(position).getProduct_Url();
+                            Log.d("check4"," "+entityId);
+
+                            Intent intent = new Intent(getActivity(),OfferZoneDetails.class);
+                            intent.putExtra("name",nme);
+                            intent.putExtra("price", price);
+                            intent.putExtra("description",desc);
+                            intent.putExtra("image",img);
+                            intent.putExtra("offerid",entityId);
+                            // intent.putExtra("url",url);
+                            startActivity(intent);
+                            getActivity().finish();
+
+
+
+//                            String image=newArrival_list.get(position).getProductPromotionImage();
+//                            AddtoCartMobile addtoCartMobile = new AddtoCartMobile();
+//                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//                            Bundle bundle = new Bundle();
+//                            bundle.putString("KeyValue",entityId);
+//                            //  bundle.putString("Url","http://54.67.107.248/jeptags/api/rest/products?filter[1][attribute]=mode&filter[1][in]=238");
+//                            addtoCartMobile.setArguments(bundle);
+//                            transaction.replace(R.id.container, addtoCartMobile);
+//                            transaction.addToBackStack(null);
+//                            transaction.commit();
                         }
 
                         @Override

@@ -138,7 +138,7 @@ protected String doInBackground(String... params) {
     try{
         HttpClient httpClient=new DefaultHttpClient();
 //        HttpPost httpPost=new HttpPost("http://54.67.107.248/jeptags/apirest/get_categories");
-        HttpPost httpPost=new HttpPost("http://bshop2u.com/now/apirest/get_categories");
+        HttpPost httpPost=new HttpPost("http://bshop2u.com/apirest/get_categories");
         JSONObject jsonObject=new JSONObject();
         jsonObject.accumulate("lang",params[0]);
         StringEntity httpiEntity=new StringEntity(jsonObject.toString());
@@ -205,7 +205,7 @@ protected String doInBackground(String... params) {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                        String id = cotegory_list.get(i).getId();
-String name=cotegory_list.get(i).getName();
+                        String name=cotegory_list.get(i).getName();
                        SubCategory subCategory=new SubCategory();
                         FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
                         Bundle bundle = new Bundle();

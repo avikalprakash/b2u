@@ -56,7 +56,7 @@
         android:layout_height="200dp"
         android:id="@+id/imageQR"
         android:layout_below="@+id/header"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/qr"
         android:layout_centerHorizontal="true"
         />
@@ -66,7 +66,7 @@
         android:layout_below="@+id/imageQR"
         android:id="@+id/text1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:textColor="@color/colorPrimary"
         android:textSize="18dp"
         android:text="@string/introducername"/>
@@ -106,7 +106,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/btn1"
         android:textColor="#ffff"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="24dp"
         android:padding="12dp"
         android:layout_marginRight="30dp"

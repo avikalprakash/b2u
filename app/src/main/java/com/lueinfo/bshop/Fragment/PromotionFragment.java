@@ -104,6 +104,7 @@ public class PromotionFragment extends Fragment {
                     boolean error = jsonObject.getBoolean("error");
 
                     if (!error) {
+
                         JSONArray jsonArray = jsonObject.getJSONArray("message");
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jobject = jsonArray.getJSONObject(i);
@@ -115,11 +116,13 @@ public class PromotionFragment extends Fragment {
                             promotionDetails.setProductid(jobject.getString("post_id"));
                             promotionDetailses.add(promotionDetails);
                             // promotionDetailses.add(new PromotionDetails((JSONObject)jsonArray.get(i)));
+
                         }
 
 
                     }
-                } catch (JSONException e) {
+                }
+                catch (JSONException e) {
                 }
             return null;
         }

@@ -79,7 +79,7 @@ holder.textsale.setText(entity.getSalePrice());
            imageView=(ImageView) itemView.findViewById(R.id.imgl2);
            textView=(TextView) itemView.findViewById(R.id.item_namel2);
            textsale=(TextView) itemView.findViewById(R.id.pri_list2);
-           textmrp=(TextView) itemView.findViewById(R.id.dep_text2) ;
+           textmrp=(TextView) itemView.findViewById(R.id.price_text2) ;
            card=(CardView)itemView.findViewById(R.id.cardview);
        }
 

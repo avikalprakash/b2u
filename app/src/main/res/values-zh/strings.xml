@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Bshops</string>
+    <string name="app_name">Bshop</string>
    <!-- <string name="title_activity_main">MainActivity</string>-->
     <string name="title_activity_home">HomeActivity</string>
     <string name="product_details">product_details</string>
@@ -13,8 +13,25 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+
+    <string name="home">家</string>
+    <string name="feed">饲料</string>
+    <string name="mall">购物中心</string>
+    <string name="notification">通知</string>
+    <string name="me">我</string>
+
+    <string name="top_collection">顶级集合</string>
+    <string name="Shop_by_category">按类别购物</string>
+    <string name="hot_deals">热卖</string>
+    <string name="best_selling">最畅销</string>
+    <string name="new_arrival">新品到货</string>
+
+    <string name="update">更新</string>
+    <string name="first_name">名字</string>
+    <string name="last_name">姓</string>
+
     <string name="action_settings">Settings</string>
-    <string name="srch">Search</string>
+    <string name="srch">搜索</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 
@@ -45,23 +62,23 @@
     <string name="zh">Chinese</string>
     <string name="msg_change_locale">消息更改。</string>
     <string name="txt_setting_changeyourlocale">改变你的语言</string>
-    <string name="CalculatePercentage">Calculate Percentage</string>
-    <string name="EnteryourBill">Enter your Bill</string>
-    <string name="EnterPercentage">Enter Percentage</string>
-    <string name="Result">Result</string>
-    <string name="Calculate">Calculate</string>
-    <string name="LoginUmallzAccount">Login Umallz Account</string>
-    <string name="CreateanewUmallzaccount">Create a new Umallz account</string>
+    <string name="CalculatePercentage">计算百分比</string>
+    <string name="EnteryourBill">输入你的账单</string>
+    <string name="EnterPercentage">输入百分比</string>
+    <string name="Result">结果</string>
+    <string name="Calculate">计算</string>
+    <string name="LoginUmallzAccount">登录B商店帐户</string>
+    <string name="CreateanewUmallzaccount">创建一个新的B商店帐户</string>
 
     <string name="previous">以前</string>
     <string name="next">下一个</string>
-    <string name="UnitPriceRs1500">Unit Price : Rs 1500</string>
-    <string name="WhiteShirt">White Shirt</string>
-    <string name="Select">Select</string>
-    <string name="Filter">Filter</string>
-    <string name="NoResultFound">No Result Found</string>
+    <string name="UnitPriceRs1500">单价 :  1500</string>
+    <string name="WhiteShirt">白衬衫</string>
+    <string name="Select">选择</string>
+    <string name="Filter">过滤</string>
+    <string name="NoResultFound">未找到结果</string>
 
-    <string name="HomeStore">Home Store</string>
+    <string name="HomeStore">家庭商店</string>
     <string name="Categories">分类</string>
     <string name="Products">制品</string>
     <string name="Fashion">时尚</string>

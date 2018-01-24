@@ -80,6 +80,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -95,6 +96,8 @@ public class AddtoCartMobile extends Fragment {
     private static final int HIDE_PROCESS_DIALOG = 0;
     private final HttpClient Client = new DefaultHttpClient();
     MyAsync myAsync;
+    String i1, i2, i3;
+
 //    private String URL_SOAP_LOGIN = "http://54.67.107.248/jeptags/apirest/soap_login";
 private String URL_SOAP_LOGIN = "http://bshop2u.com/apirest/soap_login";
     private String Content;
@@ -161,6 +164,7 @@ private String URL_SOAP_LOGIN = "http://bshop2u.com/apirest/soap_login";
     int qty=1;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
+    SessionManagement session;
     Context context;
     SessionManagement sessionManagement;
     public AddtoCartMobile() {
@@ -272,9 +276,11 @@ private String URL_SOAP_LOGIN = "http://bshop2u.com/apirest/soap_login";
         }
 
         loadData();
-
         viewPager = (ViewPager)view. findViewById(R.id.viewpager);
         dotIndicator = (DotIndicator) view.findViewById(R.id.indicator);
+
+
+
 
         button1 = (Button) view.findViewById(R.id.addToCart);
         button2 = (Button) view.findViewById(R.id.byNow);
@@ -317,7 +323,6 @@ private String URL_SOAP_LOGIN = "http://bshop2u.com/apirest/soap_login";
             }
         });
 
-        populatedata();
     }
 
     private class GetShopLogin extends AsyncTask<Void, Void, Void> {
@@ -459,57 +464,6 @@ public void cart(){
         map.getMaxZoomLevel();
 
     }*/
-   private class AddToCart extends AsyncTask<String, String, String> {
-       @Override
-       protected void onPreExecute() {
-           super.onPreExecute();
-           handler.sendEmptyMessage(SHOW_PROCESS_DIALOG);
-          // categoriesList=new ArrayList<>();
-       }
-       @Override
-       protected String doInBackground(String... params) {
-           String return_text="";
-           try{
-               HttpClient httpClient=new DefaultHttpClient();
-               HttpPost httpPost=new HttpPost("http://bshop2u.com/apirest/add_to_cart");
-               JSONObject jsonObject=new JSONObject();
-               jsonObject.accumulate("session_id",params[0]);
-               jsonObject.accumulate("cart_id",params[1]);
-               JSONArray jsonArray=new JSONArray();
-               JSONObject jsonObject1=new JSONObject();
-               jsonObject1.accumulate("product_id",params[2]);
-               jsonObject1.accumulate("qty",params[3]);
-                jsonArray.put(jsonObject1);
-               jsonObject.accumulate("products",jsonArray);
-               StringEntity httpiEntity=new StringEntity(jsonObject.toString());
-               httpPost.setEntity(httpiEntity);
-               HttpResponse httpResponse=httpClient.execute(httpPost);
-               return_text=readResponse(httpResponse);
-           }catch(Exception e){
-               e.printStackTrace();
-           }
-           return return_text;
-       }
-       @Override
-       protected void onPostExecute(String result) {
-           Log.d("result===", "" + result);
-           handler.sendEmptyMessage(HIDE_PROCESS_DIALOG);
-           try {
-               JSONObject jsonObject = new JSONObject(result);
-               if (jsonObject.getString("error").equalsIgnoreCase("false")) {
-                   String mg1=jsonObject.getString("message");
-                   showCustomAlert(mg1);
-                   cart();
-               }else if (jsonObject.getString("error").equalsIgnoreCase("true")) {
-                   String mg2=jsonObject.getString("message");
-                   showCustomAlert(mg2);
-               }
-           } catch (Exception e) {
-               e.printStackTrace();
-           }
-       }
-   }
-
     class MyAsync extends AsyncTask<String,Void,String> {
         private ProgressDialog pDialog;
         @Override
@@ -581,7 +535,7 @@ public void cart(){
         StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
-Log.d("HELLODATA",s);
+              Log.d("HELLODATA",s);
 
                 JSONObject object=null;
                 try {
@@ -684,12 +638,16 @@ Log.d("HELLODATA",s);
                     itemEntity.setMrpPrice(jsonObject.getString("price"));
 //                    itemEntity.setSalePrice(jsonObject.getString("final_price_with_tax"));
                     itemEntity.setDescription(jsonObject.getString("description"));
+                    i1=jsonObject.getString("image");
+                    i2=jsonObject.getString("thumb_image");
+                    i3=jsonObject.getString("small_image");
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 name.setText(Itemname);
 //                salePricetext.setText("MYR"+""+Saleprice);
-                Regularpricetext.setText("MYR"+""+MrpPrice);
+                Regularpricetext.setText("RM"+""+MrpPrice);
                 String desc = Description.replace("<p>", "").replace("</p>", "");
                 Descriptiontext.setText(desc);
 //                material.setText(Material);
@@ -742,6 +700,7 @@ Log.d("HELLODATA",s);
                 }catch(NullPointerException f){
                     f.printStackTrace();
                 }
+
 //                try {
 //                    mode= jsonObject.getString("mode");
 //                    if(mode.equals("")){
@@ -762,6 +721,7 @@ Log.d("HELLODATA",s);
                 cotegory_list.add(itemEntity);
                 adapter = new ImagePagerAdapter();
                 viewPager.setAdapter(adapter);
+
 //                mMapView.getMapAsync(new OnMapReadyCallback() {
 //                    @Override
 //                    public void onMapReady(GoogleMap mMap) {
@@ -818,9 +778,9 @@ Log.d("HELLODATA",s);
         {
             if (language=="") {
                 language = "EN";
-                dataload("http://bshop2u.com/apirest/get_bbb_product_detail",language);
+                dataload("http://bshop2u.com/apirest/get_product_details",language);
             }else {
-                dataload("http://bshop2u.com/apirest/get_bbb_product_detail",language);
+                dataload("http://bshop2u.com/apirest/get_product_details",language);
             }
 //            String serverURL = "http://bshop2u.com/api/rest/products/"+Entity_Id;
 
@@ -938,7 +898,6 @@ Log.d("HELLODATA",s);
     }
     @Override
     public void onDestroy() {
-        hidePDialog();
         super.onDestroy();
         dialog.dismiss();
         if ( myAsync.getStatus()== AsyncTask.Status.RUNNING)
@@ -947,84 +906,6 @@ Log.d("HELLODATA",s);
         }
     }
 
-    public void populatedata() {
-
-        pDialog = new ProgressDialog(getContext());
-        // Showing progress dialog before making http request
-        pDialog.setMessage("Loading...");
-        pDialog.show();
-
-
-        final String url = "http://bshop2u.com/apirest/soap_login";
-
-        final StringRequest movieReq = new StringRequest(url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.d("rr000", response.toString());
-                        hidePDialog();
-                        try {
-                            JSONObject objone = new JSONObject(response);
-                            boolean error = objone.getBoolean("error");
-
-                            if(error){
-
-                            }else{
-
-                                JSONObject jsonObject = objone.getJSONObject("message");
-                                 sessionid = jsonObject.getString("session_id");
-                                 cartid = jsonObject.getString("cart_id");
-
-//                                JSONArray jsonArray = objone.getJSONArray("message");
-//                                for (int i = 0; i < jsonArray.length(); i++) {
-//
-//                                    JSONObject obj = jsonArray.getJSONObject(i);
-//                                    PlainClass plainClass = new PlainClass();
-//                                    plainClass.setId(obj.getString("event_id"));
-//                                    plainClass.setTitle(obj.getString("title"));
-//                                    // movie.setTimetxt(obj.getString("created_at"));
-//                                    plainClass.setThumbnailUrl(obj.getString("image"));
-//                                    plainClass.setTimestamp(obj.getString("created_at"));
-//                                    plainClassList.add(plainClass);
-//
-//                                }
-                            }
-
-                            //  adapter.notifyDataSetChanged();
-
-                        }catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
-                    }
-
-                    // notifying list adapter about data changes
-                    // so that it renders the list view with updated data
-
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(getContext(), "You Have Some Connectivity Issue....", Toast.LENGTH_LONG).show();
-                }
-                hidePDialog();
-
-            }
-        });
-        {
-            RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-            requestQueue.add(movieReq);
-        }
-
-    }
-
-    private void hidePDialog() {
-        if (pDialog != null) {
-            pDialog.dismiss();
-            pDialog = null;
-        }
-    }
 
     public void Addcart(){
 
@@ -1033,9 +914,13 @@ Log.d("HELLODATA",s);
         pDialog.setMessage("Loading...");
         pDialog.show();
 
+        session = new SessionManagement(getActivity());
+        HashMap<String, String> user1 = session.getUserDetails();
+        String userid = user1.get(session.KEY_ID);
+
         Map<String, String> postParam= new HashMap<String, String>();
-        postParam.put("session_id", sessionid);
-        postParam.put("cart_id", cartid);
+      //  postParam.put("session_id", sessionid);
+        postParam.put("customer_id", userid);
         postParam.put("product_id", Entity_Id);
         postParam.put("qty", "1");
 
@@ -1043,7 +928,8 @@ Log.d("HELLODATA",s);
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                "http://bshop2u.com/apirest/add_to_cart", new JSONObject(postParam),
+              //  "http://bshop2u.com/apirest/add_to_cart", new JSONObject(postParam),
+                "http://bshop2u.com/apirest/add_to_cart_custom", new JSONObject(postParam),
                 new Response.Listener<JSONObject>() {
 
                     @Override
@@ -1114,109 +1000,5 @@ Log.d("HELLODATA",s);
 
     }
 
-//    class AddtoCart extends AsyncTask<String, Void, String> {
-//
-//        private ProgressDialog pDialog;
-//
-////        String username = musernametxt.getText().toString().trim();
-////        String password = mpasswordtxt.getText().toString().trim();
-////        String token = TokenSave.getInstance(LoginActivity.this).getDeviceToken();
-//
-//
-//
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//            pDialog = new ProgressDialog(getContext());
-//            pDialog.setMessage("Please Wait ...");
-//            pDialog.setIndeterminate(false);
-//            pDialog.setCancelable(true);
-//            pDialog.show();
-//
-//        }
-//
-//        @Override
-//        protected String doInBackground(String... args) {
-//            String s = "";
-//
-//
-//            try {
-//                HttpClient httpClient = new DefaultHttpClient();
-//                HttpPost httpPost = new HttpPost("http://bshop2u.com/apirest/add_to_cart");
-//                httpPost.setHeader("Content-type", "application/json");
-//                JSONObject jsonObject = new JSONObject();
-//                jsonObject.accumulate("session_id", sessionid);
-//                jsonObject.accumulate("cart_id", cartid);
-//                jsonObject.accumulate("product_id", Entity_Id);
-//                jsonObject.accumulate("qty", "1");
-//
-//                StringEntity stringEntity = new StringEntity(jsonObject.toString());
-//                httpPost.setEntity(stringEntity);
-//                HttpResponse httpResponse = httpClient.execute(httpPost);
-//                HttpEntity httpEntity = httpResponse.getEntity();
-//                s = readadsResponse(httpResponse);
-//                Log.d("tag1", " " + s);
-//            } catch (Exception exception) {
-//                exception.printStackTrace();
-//
-//                Log.d("espone",exception.toString());
-//
-//            }
-//
-//            return s;
-//
-//        }
-//        @Override
-//        protected void onPostExecute(String json) {
-//            super.onPostExecute(json);
-//            pDialog.dismiss();
-//            try {
-//                JSONObject objone = new JSONObject(json);
-//                boolean check  = objone.getBoolean("error");
-//                if(check) {
-//
-//                    String messg = objone.getString("message");
-//                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-//                    builder.setMessage(messg)
-//                            .setNegativeButton("ok", null)
-//                            .create()
-//                            .show();
-//                }else{
-//
-//                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-//                    builder.setMessage("Add to cart successfully!")
-//                            .setNegativeButton("ok", null)
-//                            .create()
-//                            .show();
-//
-//
-//                }
-//
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-//
-//
-//    private String readadsResponse(HttpResponse httpResponse) {
-//
-//        InputStream is = null;
-//        String return_text = "";
-//        try {
-//            is = httpResponse.getEntity().getContent();
-//            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
-//            String line = "";
-//            StringBuffer sb = new StringBuffer();
-//            while ((line = bufferedReader.readLine()) != null) {
-//                sb.append(line);
-//            }
-//            return_text = sb.toString();
-//            Log.d("return1230", "" + return_text);
-//        } catch (Exception e) {
-//
-//        }
-//        return return_text;
-//    }
 
 }

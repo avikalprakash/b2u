@@ -12,7 +12,7 @@
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-
+android:layout_marginTop="20dp"
     android:background="@color/fragmentbackground"
     tools:context="com.jeptag.organization.lueinfo.fragments.MobileAddtoCart">
         <LinearLayout
@@ -45,9 +45,10 @@
             android:id="@+id/layoutAddtocart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-android:layout_marginTop="15dp"
             android:layout_toRightOf="@+id/nonet_ll_cot"
-            android:layout_toEndOf="@+id/nonet_ll_cot">
+            android:layout_toEndOf="@+id/nonet_ll_cot"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp">
 
             <ScrollView
                 android:id="@+id/scrollView"
@@ -89,92 +90,99 @@ android:layout_marginTop="15dp"
                         app:selectedDotIndex="1"
                         app:unselectedDotColor="@color/colorPrimaryDark" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <RatingBar
-                            android:id="@+id/ratingbar"
-                            style="@style/StarRatingBar"
-                            android:layout_width="wrap_content"
-                            android:layout_height="30dp"
-                            android:layout_below="@+id/rating_mobile_count"
-                            android:layout_marginEnd="13dp"
-                            android:layout_marginRight="13dp"
-                            android:layout_toLeftOf="@+id/rating_mobile_count"
-                            android:layout_toStartOf="@+id/rating_mobile_count" />
-<ImageView
-    android:id="@+id/sharebutton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:src="@drawable/ic_share"
-   android:layout_gravity="right"
-    />
-                        <!--<TextView-->
-                            <!--android:id="@+id/rating_mobile_count"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_gravity="right"-->
-                            <!--android:text="0.0"-->
-                            <!--android:textColor="@color/Background" />-->
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/ItemName"
-                        style="@style/Base.CardView"
-                        android:textSize="30dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:text=""
-
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Background" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <!--<ImageView-->
-
-                        <!--android:layout_width="30dp"-->
-                        <!--android:layout_height="30dp"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:src="@drawable/usd"/>-->
-                        <!--<TextView-->
-                            <!--android:id="@+id/Sale_Price"-->
-                            <!--style="@style/Base.TextAppearance.AppCompat.Display1"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_weight="0.12"-->
-                            <!--android:gravity="left"-->
-                            <!--android:paddingRight="10dp"-->
-                            <!--android:text=""-->
-                            <!--android:textColor="@android:color/holo_green_dark" />-->
-
-
-
-                            <TextView
-                                android:id="@+id/regularprice"
-                                style="@style/Base.TextAppearance.AppCompat.Display1"
-android:gravity="left"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textSize="25sp"
-                                android:textColor="@android:color/holo_red_dark" />
-
-                            <!--<ImageView-->
-                            <!--android:layout_width="80dp"-->
-                            <!--android:src="@drawable/linepng"-->
-                            <!--android:layout_height="40dp"-->
-                            <!--android:layout_gravity="left|center_vertical" />-->
-
-                    </LinearLayout>
-
                 </LinearLayout>
             </ScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/linear2"
+                android:layout_below="@+id/scrollView">
+
+                <RatingBar
+                    android:id="@+id/ratingbar"
+                    style="@style/StarRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/rating_mobile_count"
+                    android:layout_marginEnd="13dp"
+                    android:layout_marginRight="13dp"
+                    android:layout_toLeftOf="@+id/rating_mobile_count"
+                    android:layout_toStartOf="@+id/rating_mobile_count" />
+                <ImageView
+                    android:id="@+id/sharebutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_share"
+                    android:layout_gravity="right"
+                    />
+                <!--<TextView-->
+                <!--android:id="@+id/rating_mobile_count"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="right"-->
+                <!--android:text="0.0"-->
+                <!--android:textColor="@color/Background" />-->
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/ItemName"
+                style="@style/Base.CardView"
+                android:textSize="30dp"
+                android:layout_below="@+id/linear2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text=""
+
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/Background" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/linear1"
+                android:layout_below="@+id/ItemName">
+                <!--<ImageView-->
+
+                <!--android:layout_width="30dp"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:src="@drawable/usd"/>-->
+                <!--<TextView-->
+                <!--android:id="@+id/Sale_Price"-->
+                <!--style="@style/Base.TextAppearance.AppCompat.Display1"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="0.12"-->
+                <!--android:gravity="left"-->
+                <!--android:paddingRight="10dp"-->
+                <!--android:text=""-->
+                <!--android:textColor="@android:color/holo_green_dark" />-->
+
+
+
+                <TextView
+                    android:id="@+id/regularprice"
+                    style="@style/Base.TextAppearance.AppCompat.Display1"
+                    android:gravity="left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_marginLeft="10dp"
+                    android:textSize="25sp"
+                    android:textColor="@android:color/holo_red_dark" />
+
+                <!--<ImageView-->
+                <!--android:layout_width="80dp"-->
+                <!--android:src="@drawable/linepng"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_gravity="left|center_vertical" />-->
+
+            </LinearLayout>
+
             <LinearLayout
 
                 android:orientation="vertical"
@@ -187,15 +195,7 @@ android:gravity="left"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:id="@+id/linearLayout">
-                    <!--<Button-->
-                        <!--android:id="@+id/byNow"-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_weight=".5"-->
-                        <!--android:text="Buy Now"-->
-                        <!--android:textColor="#ffff"-->
-                        <!--android:background="@color/colorPrimary"-->
-                        <!--android:layout_marginRight="5sp"/>-->
+
                     <Button
                         android:id="@+id/addToCart"
                         android:layout_width="0dp"
@@ -203,7 +203,7 @@ android:gravity="left"
                         android:layout_weight=".5"
                         android:textColor="#ffff"
                         android:text="@string/AddtoCart"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginBottom="40dp"
                         android:background="@color/colorPrimary"
                         />
                 </LinearLayout>
@@ -251,8 +251,8 @@ android:gravity="left"
                 android:layout_height="wrap_content"
                 android:text="@string/productdescriptionanddetail"
                 android:id="@+id/textView6"
-                android:layout_marginTop="20dp"
-                android:layout_below="@+id/scrollView"
+                android:layout_marginTop="0dp"
+                android:layout_below="@+id/linear1"
                 android:layout_alignParentLeft="true"
 
 

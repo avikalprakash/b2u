@@ -1,6 +1,7 @@
 package com.lueinfo.bshop;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,16 +22,27 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.lueinfo.bshop.Adapter.AndroidImageAdapternew;
 import com.lueinfo.bshop.Adapter.BottomNavigationViewHelper;
 import com.lueinfo.bshop.Adapter.ItemEntity;
 import com.lueinfo.bshop.Adapter.LanguageDatabase;
@@ -46,17 +58,29 @@ import com.lueinfo.bshop.Fragment.IntroFragment;
 import com.lueinfo.bshop.Fragment.LogOut;
 import com.lueinfo.bshop.Fragment.NotificationFragment;
 import com.lueinfo.bshop.Fragment.OfferZone;
+import com.lueinfo.bshop.Fragment.ProfileFragment;
 import com.lueinfo.bshop.Fragment.PromotionFragment;
 import com.lueinfo.bshop.Fragment.QrFragment;
 import com.lueinfo.bshop.Fragment.TodaysDeal;
+import com.lueinfo.bshop.RitsActivity.CartFragment;
+import com.lueinfo.bshop.RitsActivity.CartProducts;
+import com.lueinfo.bshop.RitsActivity.PointsFrag;
+import com.lueinfo.bshop.RitsActivity.ScanQrActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 //
 
 public class MainActivity extends AppCompatActivity
@@ -79,7 +103,13 @@ public class MainActivity extends AppCompatActivity
     private List<ItemEntity> order_des_List = new ArrayList<>();
     SessionManagement sessionManagement;
     String name;
+    TextView textView;
     String log="";
+    String count;
+    RelativeLayout searchLayout;
+
+    SharedPreferences sharedPrefotpaccheckst;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,13 +143,13 @@ tablayout.addTab(tablayout.newTab());
         headerimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             /*   Intent i=new Intent(MainActivity.this, MySearch.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);*/
+                Intent i = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(i);
             }
         });
         databaseHelper=new DatabaseHelper(MainActivity.this);
         headertext=(TextView)findViewById(R.id.headertext);
+       // searchLayout=(RelativeLayout) findViewById(R.id.search_header);
         headertext.setText("Bshop");
         username1=(TextView)findViewById(R.id.username1);
         username2=(TextView)findViewById(R.id.username2);
@@ -147,15 +177,16 @@ tablayout.addTab(tablayout.newTab());
 
 
 
-
 //        TextView fab = (TextView) findViewById(R.id.fab);
-        /*TextView textView = (TextView)findViewById(R.id.fab2);
-        ArrayList<Details> contact = databaseHelper.getContact();
-        m=new Message();
-        sessionManagement = new SessionManagement(getApplicationContext());
-        int size = contact.size();
-        Log.d("size", "" + size);
-        textView.setText(String.valueOf(size));*/
+           textView = (TextView)findViewById(R.id.fab2);
+
+
+//        ArrayList<Details> contact = databaseHelper.getContact();
+//        m=new Message();
+//        sessionManagement = new SessionManagement(getApplicationContext());
+//        int size = contact.size();
+//        Log.d("size", "" + size);
+//        textView.setText(String.valueOf(size));
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -225,19 +256,55 @@ tablayout.addTab(tablayout.newTab());
         frame_head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              /*  AllCarts allCarts = new AllCarts();
-                if (!allCarts.isInLayout()) {
-                    FragmentTransaction transaction = MainActivity.this.getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.container, allCarts);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-                }*/
+
+//                CartFragment cartFragment = new CartFragment();
+//                FragmentTransaction carttransaction123 = getSupportFragmentManager().beginTransaction();
+//                carttransaction123.replace(R.id.container, cartFragment);
+//                carttransaction123.addToBackStack(null);
+//                carttransaction123.commit();
+//                headertext.setText("Cart");
+
+                if(sessionManagement.isLoggedIn())
+                {
+                    Intent intent = new Intent(MainActivity.this,CartProducts.class);
+                    startActivity(intent);
+                    MainActivity.this.finish();
+                }
+                else
+                    {
+                        Toast.makeText(getApplicationContext(),"Please login first",Toast.LENGTH_LONG).show();
+                        Intent intent=new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
+
             }
         });
         //hide header
 
         checkRunTimePermission();
 
+
+        if(sessionManagement.isLoggedIn())
+        {
+            ImageSLideShow();
+
+//            sharedPrefotpaccheckst = getSharedPreferences("MyPreffacultyaccheckstudent", Context.MODE_PRIVATE);
+//            count = sharedPrefotpaccheckst.getString("count",null);
+//            Log.d("kjhbibsivdb",""+count);
+//            textView.setText(count);
+
+
+        }else
+            {
+                textView.setText("0");
+            }
+
+    }
+
+    @Override
+    protected void onRestart() {
+
+        super.onRestart();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -282,7 +349,40 @@ tablayout.addTab(tablayout.newTab());
 
                     return true;
 
+                case R.id.navigation_c:
 
+                    sessionManagement = new SessionManagement(MainActivity.this);
+                    if(sessionManagement.isLoggedIn()) {
+                        HashMap<String, String> user1 = sessionManagement.getUserDetails();
+
+                        if (user1 != null) {
+                            try {
+                                ProfileFragment profileFragment = new ProfileFragment();
+                                FragmentTransaction transactionprofile = getSupportFragmentManager().beginTransaction();
+                                transactionprofile.replace(R.id.container, profileFragment);
+                                transactionprofile.addToBackStack(null);
+                                transactionprofile.commit() ;
+                                headertext.setText("Profile");
+                            }  catch (Exception e){}
+                        }
+                    }else {
+                        Toast.makeText(getApplicationContext(),"Please login first",Toast.LENGTH_LONG).show();
+                        Intent intent=new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+
+                    }
+
+                    return true;
+
+                case R.id.navigation_comment:
+
+                NotificationFragment notificationFragment = new NotificationFragment();
+                FragmentTransaction transactionNotify = getSupportFragmentManager().beginTransaction();
+                    transactionNotify.replace(R.id.container, notificationFragment);
+                    transactionNotify.addToBackStack(null);
+                    transactionNotify.commit();
+
+                    return true;
 
             }
             return false;
@@ -337,7 +437,9 @@ tablayout.addTab(tablayout.newTab());
         ActivityCompat.requestPermissions(MainActivity.this, new String[]
                 {
                         CAMERA,
-                        ACCESS_COARSE_LOCATION
+                        ACCESS_COARSE_LOCATION,
+                        READ_EXTERNAL_STORAGE,
+                        WRITE_EXTERNAL_STORAGE
 
                 },  REQUEST_PERMISSION_CODE);
 
@@ -373,11 +475,13 @@ tablayout.addTab(tablayout.newTab());
 
         int FirstPermissionResult = ContextCompat.checkSelfPermission(getApplicationContext(), CAMERA);
         int SecondPermissionResult = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_COARSE_LOCATION);
-//        int ThirdPermissionResult = ContextCompat.checkSelfPermission(getApplicationContext(), READ_PHONE_STATE);
+        int ThirdPermissionResult = ContextCompat.checkSelfPermission(getApplicationContext(), READ_EXTERNAL_STORAGE);
+        int FourthPermissionResult = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE);
 
         return FirstPermissionResult == PackageManager.PERMISSION_GRANTED &&
-                SecondPermissionResult == PackageManager.PERMISSION_GRANTED ;
-//                ThirdPermissionResult == PackageManager.PERMISSION_GRANTED;
+                SecondPermissionResult == PackageManager.PERMISSION_GRANTED &&
+                ThirdPermissionResult == PackageManager.PERMISSION_GRANTED &&
+                FourthPermissionResult == PackageManager.PERMISSION_GRANTED ;
     }
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -420,6 +524,20 @@ tablayout.addTab(tablayout.newTab());
         }
         else if(id==R.id.noti_draw){
             NotificationFragment notificationFragment = new NotificationFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, notificationFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+            //           m.toast(this,"Notification comming soon .....");
+//            headertext.setText("HOME");
+        }
+        else if(id==R.id.scanqr){
+           startActivity(new Intent(MainActivity.this, ScanQrActivity.class));
+        }
+
+        else if(id==R.id.prepoint){
+
+            PointsFrag notificationFragment = new PointsFrag();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.container, notificationFragment);
             transaction.addToBackStack(null);
@@ -521,23 +639,27 @@ tablayout.addTab(tablayout.newTab());
 //
 //            }
         }else if(id == R.id.myaccount) {
-//            UserProfile userProfile = new UserProfile();
-//            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//            transaction.replace(R.id.container, userProfile);
-////            transaction.addToBackStack(null);
-//            transaction.commit();
-
-
+            ProfileFragment profileFragment = new ProfileFragment();
+            FragmentTransaction transactionprofile = getSupportFragmentManager().beginTransaction();
+            transactionprofile.replace(R.id.container, profileFragment);
+            transactionprofile.addToBackStack(null);
+            transactionprofile.commit() ;
+            headertext.setText("Profile");
         }
 
 
         else if(id ==R.id.Logout){
+
+//            SharedPreferences.Editor editor = sharedPrefotpaccheckst.edit();
+//            editor.remove("count");
+//            editor.apply();
 
             LogOut logOut=new LogOut();
             FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.container,logOut);
             transaction.addToBackStack(null);
             transaction.commit();
+
         }
 
         else if (id ==R.id.login){
@@ -545,6 +667,7 @@ tablayout.addTab(tablayout.newTab());
             startActivity(intent);
         }
         else if (id ==R.id.event){
+
             EventFragment todaysDeal = new EventFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.container, todaysDeal);
@@ -559,6 +682,13 @@ tablayout.addTab(tablayout.newTab());
             transaction.addToBackStack(null);
             transaction.commit() ;
             headertext.setText("Event");
+        }
+
+        else if (id ==R.id.mycart){
+
+            Intent intent = new Intent(MainActivity.this,CartProducts.class);
+            startActivity(intent);
+            MainActivity.this.finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -714,5 +844,75 @@ tablayout.addTab(tablayout.newTab());
         // i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
     }
+
+    public void ImageSLideShow(){
+
+        session = new SessionManagement(MainActivity.this);
+        HashMap<String, String> user1 = session.getUserDetails();
+        String userid = user1.get(session.KEY_ID);
+
+        Map<String, String> postParam= new HashMap<String, String>();
+        // postParam.put("session_id", sessionid);
+        postParam.put("customer_id", userid);
+
+
+
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                "http://bshop2u.com/apirest/get_cart_products_count_custom", new JSONObject(postParam),
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject objone) {
+                        Log.d("tag", objone.toString());
+                        try {
+                            // JSONObject objone = new JSONObject(response);
+                            boolean check  = objone.getBoolean("error");
+                            String itemcount = objone.getString("message");
+
+                            textView.setText(itemcount);
+
+//                            SharedPreferences sharedPrefotpaccheckst = getSharedPreferences("MyPreffacultyaccheckstudent", Context.MODE_PRIVATE);
+//                            SharedPreferences.Editor editor123accheckst = sharedPrefotpaccheckst.edit();
+//                            editor123accheckst.putString("count",itemcount);
+//                            editor123accheckst.commit();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("tag", "Error: " + error.getMessage());
+                //  hideProgressDialog();
+            }
+        }) {
+
+            /**
+             * Passing some request headers
+             * */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                return headers;
+            }
+
+
+
+        };
+
+        jsonObjReq.setTag("tag");
+        // Adding request to request queue
+        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+        queue.add(jsonObjReq);
+
+
+
+    }
+
+
 
 }

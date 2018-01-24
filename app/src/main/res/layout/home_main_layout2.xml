@@ -116,7 +116,7 @@
                 android:dividerHeight="10.0sp"
                 android:scrollbars="vertical"
                 android:layout_height="1050dp"
-                android:layout_below="@+id/listViewproducts">
+                android:layout_below="@+id/listViewHotDeals">
 
             </ListView>
 
@@ -148,7 +148,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:id="@+id/listViewproducts"
+                android:id="@+id/listViewHotDeals"
                 android:layout_below="@+id/view5"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"

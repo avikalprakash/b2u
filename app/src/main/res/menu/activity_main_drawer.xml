@@ -65,9 +65,18 @@
             android:icon="@drawable/calendarev"
             android:title="@string/event"/>
         <item
+            android:id="@+id/scanqr"
+            android:icon="@drawable/qr"
+            android:title="Scan Qr"/>
+        <item
             android:id="@+id/specialPromotion"
             android:icon="@drawable/promotion"
             android:title="@string/specialPromotion"/>
+
+        <item
+            android:id="@+id/prepoint"
+            android:icon="@drawable/percentage"
+            android:title="Prepaid"/>
         <item
             android:id="@+id/login"
             android:icon="@drawable/login"

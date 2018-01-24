@@ -11,8 +11,62 @@ public class PromotionDetails {
     String description;
     String image;
     String created_at;
+    String price;
+    String actualprice;
     String productid;
+    String itemid;
 
+    String money;
+    String cashpoint;
+    String cashpointdate;
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
+
+    public String getCashpoint() {
+        return cashpoint;
+    }
+
+    public void setCashpoint(String cashpoint) {
+        this.cashpoint = cashpoint;
+    }
+
+    public String getCashpointdate() {
+        return cashpointdate;
+    }
+
+    public void setCashpointdate(String cashpointdate) {
+        this.cashpointdate = cashpointdate;
+    }
+
+    public String getItemid() {
+        return itemid;
+    }
+
+    public void setItemid(String itemid) {
+        this.itemid = itemid;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getActualprice() {
+        return actualprice;
+    }
+
+    public void setActualprice(String actualprice) {
+        this.actualprice = actualprice;
+    }
 
     public String getProductid() {
         return productid;

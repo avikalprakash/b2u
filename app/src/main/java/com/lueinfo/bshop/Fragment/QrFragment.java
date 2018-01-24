@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -166,10 +167,15 @@ public class QrFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        View v1 = getActivity().getWindow().getDecorView().getRootView();
-        v1.setDrawingCacheEnabled(true);
-        myBitmap = v1.getDrawingCache();
-        saveBitmap(myBitmap);
+        switch (v.getId()){
+            case R.id.share_btn:
+                View v1 = getActivity().getWindow().getDecorView().getRootView();
+                v1.setDrawingCacheEnabled(true);
+                myBitmap = v1.getDrawingCache();
+                saveBitmap(myBitmap);
+                break;
+        }
+
     }
 
     public void saveBitmap(Bitmap bitmap) {

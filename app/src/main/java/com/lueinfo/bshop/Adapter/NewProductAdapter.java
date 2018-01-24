@@ -45,11 +45,14 @@ public NewProductAdapter(Context con, List<ItemEntity> list){
         holder.textsale.setText(entity.getSalePrice());
 
         String sale=entity.getSalePrice();
-        if(!sale.equals("null")){
-            holder.textmrp.setTextColor(Color.BLACK);
-            holder.textsale.setVisibility(View.VISIBLE);
-            holder. textmrp.setPaintFlags( Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
-        }
+        try {
+            if(!sale.equals("null")){
+                holder.textmrp.setTextColor(Color.BLACK);
+                holder.textsale.setVisibility(View.VISIBLE);
+                holder. textmrp.setPaintFlags( Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
+            }
+        }catch (Exception e){}
+
         Picasso.with(context).load(entity.getProductPromotionImage()).into(holder.imageView);
 
     }
@@ -67,7 +70,7 @@ public NewProductAdapter(Context con, List<ItemEntity> list){
             imageView=(ImageView) itemView.findViewById(R.id.imgl2);
             textView=(TextView) itemView.findViewById(R.id.item_namel2);
             textsale=(TextView) itemView.findViewById(R.id.pri_list2);
-            textmrp=(TextView) itemView.findViewById(R.id.dep_text2) ;
+            textmrp=(TextView) itemView.findViewById(R.id.price_text2) ;
         }
     }
 }

@@ -1,9 +1,25 @@
 <resources>
-    <string name="app_name">BShops</string>
+    <string name="app_name">Bshop</string>
     <string name="title_activity_home">HomeActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="home">Home</string>
+    <string name="feed">Feed</string>
+    <string name="mall">Mall</string>
+    <string name="notification">Notification</string>
+    <string name="me">Me</string>
+
+    <string name="top_collection">Top Collection</string>
+    <string name="Shop_by_category">Shop by Category</string>
+    <string name="hot_deals">Hot Deals</string>
+    <string name="best_selling">Best Selling</string>
+    <string name="new_arrival">New Arrival</string>
+
+    <string name="update">Update</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
 
 
     <string name="Home_Store_name">Home</string>
@@ -46,7 +62,7 @@
     <string name="EnterPercentage">Enter Percentage</string>
     <string name="Result">Result</string>
     <string name="Calculate">Calculate</string>
-    <string name="LoginUmallzAccount">Login Umallz Account</string>
+    <string name="LoginUmallzAccount">Login B Shop Account</string>
     <string name="CreateanewUmallzaccount">Create a new Umallz account</string>
 
     <string name="previous">Previous</string>

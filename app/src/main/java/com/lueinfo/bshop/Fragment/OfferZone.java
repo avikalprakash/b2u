@@ -2,14 +2,10 @@ package com.lueinfo.bshop.Fragment;
 
 
 import android.app.ProgressDialog;
-import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -31,20 +27,15 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.lueinfo.bshop.Adapter.CustomListAdapter;
+import com.lueinfo.bshop.Adapter.OfferZoneListAdapter;
 import com.lueinfo.bshop.Adapter.PromotionModel;
 import com.lueinfo.bshop.OfferZoneDetails;
 import com.lueinfo.bshop.R;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +50,7 @@ public class OfferZone extends Fragment {
     Bitmap myBitmap;
     private ProgressDialog pDialog;
     Button msharebtn;
-    CustomListAdapter adapter;
+    OfferZoneListAdapter adapter;
     GridView grid;
     TextView title;
     List<PromotionModel> promotionlist = new ArrayList<>();
@@ -150,7 +141,7 @@ public class OfferZone extends Fragment {
                                         promotionlist.add(movie);
 
                                     }
-                                    adapter = new CustomListAdapter(getActivity(), promotionlist);
+                                    adapter = new OfferZoneListAdapter(getActivity(), promotionlist);
                                     grid.setAdapter(adapter);
                                     adapter.notifyDataSetChanged();
 

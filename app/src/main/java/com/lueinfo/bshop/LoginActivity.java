@@ -33,6 +33,7 @@ import com.lueinfo.bshop.Adapter.ItemEntity;
 import com.lueinfo.bshop.Adapter.SQLiteHandler;
 import com.lueinfo.bshop.Adapter.SessionManagement;
 import com.lueinfo.bshop.Adapter.Utils;
+import com.lueinfo.bshop.RitsActivity.ForgotPassword;
 
 
 import org.apache.http.HttpEntity;
@@ -68,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
     String password ="";
     CheckBox hidePass;
     private CallbackManager callbackManager;
-    private TextView textView;
+    private TextView textView,fgpasstxt;
 
     private AccessTokenTracker accessTokenTracker;
     private ProfileTracker profileTracker;
@@ -109,7 +110,16 @@ public class LoginActivity extends AppCompatActivity {
         create_ac2 = (TextView) findViewById(R.id.create_ac2);
       //  LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
 //        textView = (TextView) findViewById(R.id.textView);
-headertext=(TextView)findViewById(R.id.header3text);
+
+        fgpasstxt = (TextView) findViewById(R.id.fgpasstxt);
+        fgpasstxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this,ForgotPassword.class));
+            }
+        });
+
+        headertext=(TextView)findViewById(R.id.header3text);
         headertext.setText("LOGIN");
        // loginButton.setReadPermissions("user_friends");
        // loginButton.setFragment(this);
